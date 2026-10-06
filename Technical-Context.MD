@@ -47,7 +47,7 @@ Changing any row above needs an ADR in `docs/adr/`. Current ADRs: 0001 (journey 
 ## Testing & the ratchet
 
 - Test tiers: **unit** (`flutter test test/unit`), **widget** (`flutter test test/widget`), **integration** (`flutter test integration_test`, device or emulator).
-- TDD: write the failing test first (`/factory-tdd`). Trigger logic requires unit tests including boundary cases (exactly on the radius, GPS jitter, stale fix).
+- TDD: write the failing test first (`/factory-tdd`). Trigger logic requires unit tests including boundary cases (exactly at the alert distance, GPS jitter, stale fix).
 - Coverage ratchet: line coverage on `lib/` may never fall below the current baseline recorded in `.coverage-baseline`; raise it when coverage rises.
 - Before every PR: `dart format --set-exit-if-changed .`, `flutter analyze`, `flutter test`.
 
