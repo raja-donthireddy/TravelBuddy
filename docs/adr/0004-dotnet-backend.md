@@ -13,6 +13,6 @@
 ## Hosting and data
 - Hosted in **Azure**. Database: **Azure SQL Database** (SQL Server engine), accessed with Entity Framework Core.
 - TLS only; encryption at rest through Azure SQL transparent data encryption (on by default); secrets in Azure Key Vault, not in source or app settings files; managed identity for database access where possible.
-- **Region for India: India South Central** (product owner decision). Before building, confirm that the region is available to our subscription and that every service we use (Azure SQL Database, Key Vault, the compute and push services) is offered there; if one is missing, the fallback is Central India, to be agreed.
-- **Region for UK users:** none. For the test phase there is a **single deployment in India South Central** serving all users. Data protection implications (UK GDPR transfers, India DPDP) are deliberately deferred and tracked in `docs/production-readiness.md`.
+- **Region: UK South** (product owner decision). Single deployment serving all users, UK and India, during the test phase. Before building, confirm that every service we use (Azure SQL Database, Key Vault, the compute and push services) is available in UK South; the paired region UK West is the fallback for recovery. Latency for Indian users is acceptable for one-minute updates.
+- Data protection implications for Indian users' data held in the UK are deliberately deferred and tracked in `docs/production-readiness.md`.
 - Specific Azure services (App Service or Container Apps, Notification Hubs or direct push) are chosen in the Plan for the first backend Story.

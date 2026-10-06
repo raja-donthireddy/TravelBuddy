@@ -3,7 +3,7 @@
 TravelBuddy is currently a test app for the UK and India. The items below were consciously deferred. Revisit every one before any production or public release.
 
 ## Data protection (deferred by product owner, 2026-10-06)
-- **Single deployment.** All users, UK and India, are served from Azure India South Central (ADR-0004). Before production: decide whether to keep one deployment or split into UK South and India South Central, and put a lawful transfer mechanism in place for UK users' data held in India.
+- **Single deployment.** All users, UK and India, are served from Azure UK South (ADR-0004). Before production: decide whether to keep one deployment or add a deployment in India, and assess the position of Indian users' data held in the UK under the DPDP Act.
 - **Laws to assess:** UK GDPR and India DPDP Act for location, contact and account data (lawful basis, minimisation, retention, access, erasure, children's data).
 - **DPIA** for continuous location sharing, and a review of the retention default (24 hours after a journey ends, ADR-0001).
 - **Privacy notice** content: location read about once a minute and faster only near the alert point; nothing read without an armed alarm (SOS excepted); Google processes search and map usage; journey content is not end-to-end encrypted; the contact-matching flow.
@@ -12,7 +12,7 @@ TravelBuddy is currently a test app for the UK and India. The items below were c
 
 ## Platform and vendor
 - **Google Maps terms** on storing place data and coordinates, before building saved places (ADR-0003).
-- **Azure region availability:** confirm India South Central supports every service used; fallback Central India (ADR-0004).
+- **Azure region availability:** confirm UK South supports every service used; fallback UK West (ADR-0004).
 - **App store review** of background and "always" location use, with the required explanation and Android's visible notification while tracking.
 - **Google Maps billing:** quotas and budget alerts in place.
 
