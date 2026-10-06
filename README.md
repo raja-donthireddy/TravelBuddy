@@ -9,12 +9,8 @@ Wakes you up during a journey when you get close to your destination, using GPS 
 
 ## Getting started
 
-Install the Flutter stable SDK, then:
+Mobile app (Flutter, `mobile/`): install the Flutter stable SDK, then `flutter pub get`, `flutter test`, `flutter run`.
 
-```
-flutter pub get
-flutter test
-flutter run
-```
+Backend (.NET, `backend/`): install the .NET SDK, then `dotnet build` and `dotnet test`.
 
-The Flutter app project is created by the first delivered Story.
+The projects are created by the first delivered Stories.

@@ -14,7 +14,9 @@
 - **Link viewer** — a person with the web link only; read-only, no account, no push.
 - **Share link** — a read-only URL for one journey, with an unguessable ID; ends with the journey or on revoke.
 - **Backend** — the service that holds journey state, serves the web link and sends push notifications.
-- **Alert distance** — how far from the destination the alarm should ring: 5, 10, 15, 20 or 50 km or miles.
+- **Alert distance** — how far from the destination the alarm should ring: a whole number from 1 to 100 in km or miles, chosen with a slider and a text box that stay in sync.
+- **Final approach** — the last few minutes before the alert point, when location checks speed up (15 to 60 seconds).
+- **Geofence** — an OS-level region at the alert distance that wakes the app if a reading is missed.
 - **Distance remaining** — straight-line distance from the current position to the destination.
 - **ETA** — indicative estimated time of arrival, shown for information; it does not trigger the alarm.
 - **Distance unit** — the user's choice of kilometres or miles.
