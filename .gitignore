@@ -24,5 +24,39 @@ diff_output.txt
 scratch.txt
 dump.txt
 
-# Stack-specific ignores (Python/.NET/Node/etc.) are added once the stack is
-# chosen -- see /factory-init-tech-context.
+# Flutter / Dart
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+coverage/
+*.iml
+.pub-cache/
+.pub/
+
+# Android
+**/android/.gradle/
+**/android/local.properties
+**/android/key.properties
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+*.jks
+*.keystore
+
+# iOS
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/ephemeral/
+**/ios/xcuserdata/
+
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+appsettings.Development.json
+appsettings.Local.json
+TestResults/

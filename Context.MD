@@ -1,0 +1,29 @@
+# Context — TravelBuddy domain glossary
+
+- **Journey** — a trip the user is on, from now until they reach the destination or cancel.
+- **Destination** — the geographic point (latitude/longitude, with optional label) the user wants to be woken near.
+- **Location alarm** — a destination plus an alert distance, with an armed or disarmed state.
+- **Armed** — the alarm is actively monitoring the device location.
+- **Trigger** — the moment the device is first judged to be within the alert distance; fires the alarm once.
+- **Ringing** — the alarm is sounding and waiting to be dismissed or snoozed.
+- **Dismiss** — the user stops the ringing and ends monitoring for that alarm.
+- **Snooze** — the user silences the ringing temporarily; it re-rings after the snooze interval if still within the alert distance.
+- **Position fix** — one reading of the device location with accuracy and timestamp.
+- **Stale fix** — a position fix older than the freshness limit; never used to trigger or to suppress a trigger.
+- **Registered contact** — a trusted contact who has a TravelBuddy account; the only kind that receives push notifications, and only when the traveller selects them.
+- **Link viewer** — a person with the web link only; read-only, no account, no push.
+- **Share link** — a read-only URL for one journey, with an unguessable ID; ends with the journey or on revoke.
+- **Backend** — the .NET service, hosted in Azure with Azure SQL, that holds journey state, serves the web link and sends push notifications.
+- **Contact picker** — the phone's built-in screen for choosing contacts; gives the app only the chosen contacts.
+- **Alert distance** — how far from the destination the alarm should ring: a whole number from 1 to 100 in km or miles, chosen with a slider and a text box that stay in sync.
+- **Final approach** — the last few minutes before the alert point, when location checks speed up (15 to 60 seconds).
+- **Geofence** — an OS-level region at the alert distance that wakes the app if a reading is missed.
+- **Distance remaining** — straight-line distance from the current position to the destination.
+- **ETA** — indicative estimated time of arrival, shown for information; it does not trigger the alarm.
+- **Distance unit** — the user's choice of kilometres or miles.
+- **Temperature unit** — the user's choice of °C or °F; destination temperature display is planned.
+- **Delay detection** — recognising that progress has slowed or stopped, from the device's own movement.
+- **Safe arrival** — arrival at the destination, detected automatically or confirmed by the traveller; notifies selected contacts and ends the journey.
+- **SOS** — user-initiated emergency action that shares location and alerts selected contacts until cancelled.
+- **Check-in** — an optional "Are you OK?" prompt; a missed one notifies selected contacts with the last known location.
+- **Coarse location** — deliberately reduced-precision location shown when the traveller hides exact position.
