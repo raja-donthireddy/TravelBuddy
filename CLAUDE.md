@@ -51,4 +51,8 @@ Authority order (earlier wins): **ADR > Technical-Context > Context.MD > Spec > 
 
 <!-- TODO(init): fill once the stack is chosen — install / test tiers / run.
      Written by /factory-init-tech-context or the first feature build. -->
-_Dev commands not set yet — filled when the stack is chosen (`/factory-init-tech-context`)._   <!-- filled per-product at init: install / test tiers / run -->
+- Install: `flutter pub get`
+- Format: `dart format --set-exit-if-changed .`
+- Lint: `flutter analyze`
+- Test: `flutter test` (unit: `flutter test test/unit`, widget: `flutter test test/widget`, integration: `flutter test integration_test`)
+- Run: `flutter run`
