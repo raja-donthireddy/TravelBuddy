@@ -103,6 +103,9 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - Google Maps Platform cost and terms: billing must be enabled, usage capped with quotas and budget alerts, and caching limits respected.
 - **Note for saved places:** Google's terms limit how long place data and coordinates may be stored; store the place ID and refresh coordinates. Verify the current terms before building saved places (see ADR-0003).
 
+## Production readiness
+This is a test app. Items deferred until production, including data protection, are listed in `docs/production-readiness.md`.
+
 ## Out of scope for now
 Other regions; operator-specific rail, transit or airline data; end-to-end encryption; in-app calling; paid tiers; destination temperature (planned).
 

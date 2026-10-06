@@ -14,12 +14,5 @@
 - Hosted in **Azure**. Database: **Azure SQL Database** (SQL Server engine), accessed with Entity Framework Core.
 - TLS only; encryption at rest through Azure SQL transparent data encryption (on by default); secrets in Azure Key Vault, not in source or app settings files; managed identity for database access where possible.
 - **Region for India: India South Central** (product owner decision). Before building, confirm that the region is available to our subscription and that every service we use (Azure SQL Database, Key Vault, the compute and push services) is offered there; if one is missing, the fallback is Central India, to be agreed.
-- **Region for UK users:** not yet decided. See the open question below.
+- **Region for UK users:** none. For the test phase there is a **single deployment in India South Central** serving all users. Data protection implications (UK GDPR transfers, India DPDP) are deliberately deferred and tracked in `docs/production-readiness.md`.
 - Specific Azure services (App Service or Container Apps, Notification Hubs or direct push) are chosen in the Plan for the first backend Story.
-
-## Open question
-One deployment or two? A single deployment in India South Central would hold UK users' data in India, which needs a lawful transfer mechanism under UK GDPR. Two regional deployments (UK South and India South Central) keep data in-country but need a way to handle a UK traveller sharing with an Indian contact.
-- Retention: scheduled job deletes journey data per ADR-0001.
-
-## Consequences
-- One language for backend and web page; separate Flutter and .NET toolchains in one repository.
