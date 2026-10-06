@@ -8,68 +8,82 @@
 Travellers by train, bus, car and public transport fall asleep and miss their stop, have to watch their progress by hand, and keep messaging family to say where they are. Alarm apps only know clock time. Location-sharing apps know nothing about the destination. TravelBuddy joins the two.
 
 ## Scope and market
-A **global, mode-agnostic** mobile app (Android and iOS). It works from the device's own location and a generic routing/geocoding provider. It does not depend on any national rail, transit or traffic operator feed.
+- A **test app** for Android and iOS, targeting the **UK and India** first.
+- Mode-agnostic (train, bus, car, walking). Works from the device's own location; no dependency on any rail, transit or traffic operator feed.
+- Defaults come from device region (miles in the UK, kilometres in India) and can be changed in settings.
 
-## Users (personas)
-Daily commuter, business traveller, student sharing with parents, elderly traveller, solo traveller. A **trusted contact** is the second user type: either an installed-app user or a person who only has a link.
+## Users
+Daily commuter, business traveller, student sharing with parents, elderly traveller, solo traveller. A **trusted contact** is the second user type:
+- a **registered contact**: has the TravelBuddy app and an account; can receive push notifications;
+- a **link viewer**: has only a web link; read-only; no account.
 
 ## Primary scenario
-A traveller picks a destination, chooses "alert me 10 minutes before arrival", and shares the journey with a trusted contact. During the trip the app tracks position, ETA, remaining distance and progress. The contact watches live. Ten minutes out, a loud alarm rings and a push notification shows. On arrival (detected or confirmed) the contact sees "arrived safely" and the share ends.
+A traveller picks a destination, chooses "alert me 10 km before", and selects a registered contact to notify. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At the chosen distance a loud alarm rings and a notification shows. On arrival (detected or confirmed) the selected contact is notified "arrived safely", the link shows the arrival status, and the journey ends.
 
-## Core features
+## Core principle: minimal use of the phone
+A **journey** exists only while an alarm is armed. The app reads location **once a minute** while a journey is active, and not at all otherwise. Sharing, battery, check-in and arrival detection are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
 
-### F1. Smart Arrival Alarm
-- Destination search: cities, stations, airports, postcodes, landmarks, saved places, dropped map pins (global).
-- Alert lead time: 5, 10, 15, 30 minutes or custom; plus a distance radius as a fallback.
-- Rings with screen locked and app backgrounded; dismiss and snooze.
+## Features
+
+### F1. Smart Arrival Alarm (distance-based)
+- Destination search: cities, stations, airports, bus stations, postcodes, landmarks, saved places, dropped map pins.
+- Alert distance before the destination: **5, 10, 15, 20 or 50** (kilometres or miles). Default 10.
+- Distance is the straight-line distance remaining to the destination.
+- Rings with the screen locked and the app in the background; dismiss and snooze.
+- **Settings:** distance unit (km / miles); temperature unit (°C / °F).
 
 ### F2. Live Journey Tracking
-- Current location, route progress, ETA, remaining distance, speed, route changes.
-- Map with position, destination, planned route and progress.
-- Traveller dashboard: destination, ETA, distance remaining, location, alarm countdown, sharing status, battery, progress %.
+- Current location, remaining distance, progress %, speed, indicative ETA, map with position and destination (route line optional).
+- Traveller dashboard: destination, ETA, distance remaining, location, alarm countdown (distance to alert point), sharing status, battery, progress %.
+- Updates once a minute.
+- **Future:** show the destination's temperature in the chosen unit.
 
-### F3. Trusted Companion Sharing (end-to-end encrypted)
-- Share via secure web link, SMS, WhatsApp, email or QR code. Web viewers need no account.
-- Installed-app contacts receive in-app notifications; link-only contacts see updates on the web page.
-- Shared: live location, progress, ETA, remaining distance, status, optional battery, last-updated time.
-- Contact dashboard: location, live map, ETA, progress, remaining distance, arrival status, last update.
+### F3. Journey sharing
+- **Web link:** read-only, valid for that one journey only. Share by SMS, email, WhatsApp, QR or any messaging app, at the traveller's choice. Anyone with the link can view; no account needed. The link stops working when the journey ends or the traveller revokes it.
+- **Registered contacts:** the traveller selects contacts from other registered users; only those selected receive push notifications.
+- Shown: location, remaining distance, progress, ETA, status, optional battery, last-updated time.
+- Contact dashboard: location, map, ETA, progress, remaining distance, arrival status, last update.
 
 ### F4. Safe-arrival notifications
-Journey started, near destination, arrived safely, sharing ended. Installed-app contacts get a push notification. Link viewers see the status change on the page once the traveller arrives (banner, title change, optional sound).
+Journey started, near destination, arrived safely, sharing ended. Push goes to **selected registered contacts only**. Link viewers see the status change on the page when the destination is reached.
 
 ### F5. Family safety
-- **SOS:** one tap shares location, alerts emergency contacts, opens emergency-call actions, starts live tracking. TravelBuddy does not itself contact emergency services.
-- **Check-ins:** optional "Are you OK?" prompts; on no response, notify contacts with last known location.
-- **Low battery:** notify contacts at configurable thresholds.
+- **SOS:** one tap shares current location, alerts the selected registered contacts, opens emergency-call actions, and tracks until cancelled. TravelBuddy does not contact emergency services.
+- **Check-ins:** optional "Are you OK?" prompts during a journey; if unanswered, selected registered contacts are notified with the last known location.
+- **Low battery:** selected registered contacts are notified at configurable thresholds.
 
-### F6. Smart Delay Detection (AI)
-Detect delays, stops and route changes from the device's own movement and the routing provider, and adjust ETA automatically. Works anywhere, with no operator feeds. (Further AI features: none specified yet.)
+### F6. Smart Delay Detection
+Identify slowed or stopped progress from the device's movement and flag a changed ETA. Indicates that progress slowed, not why. No operator feeds. (No other AI features specified.)
 
-### F7. Privacy and security controls
-Share one journey only, expiry times, instant revoke, choose what is shared, hide exact location (coarse area or progress only), data retention controls, GDPR rights tooling.
+### F7. Privacy controls
+Share one journey only; link expiry and instant revoke; choose what is shared (including battery); hide exact location (coarse area only); data retention controls; data subject access and erasure.
 
-## Privacy and security requirements
-- **End-to-end encryption** of all journey content (location, ETA, status, battery). The server sees only ciphertext plus the minimum metadata to route and expire it. See ADR-0001.
-- Secure, unguessable, expiring links; revocation takes effect immediately for new updates.
-- Role-based access: traveller (owner), trusted contact (view), link viewer (view only).
-- GDPR: lawful basis, data minimisation, retention limits, data subject access and erasure, DPIA before launch. Location data is personal data and handled as CONFIDENTIAL.
+## Security and privacy requirements
+- All traffic over TLS; stored data encrypted at rest by the hosting platform. **Journey content is not end-to-end encrypted** (decision recorded in ADR-0001). The privacy notice and UI must not claim it is.
+- Web link carries an unguessable random identifier, grants read-only access to one journey, and is rate-limited.
+- Push notifications go only to registered users the traveller has selected.
+- Role-based access: traveller (owner), registered contact (view and notifications), link viewer (view only).
+- Follow OWASP MASVS (mobile) and ASVS (backend).
+- UK GDPR and India DPDP Act apply to location and contact data: lawful basis, minimisation, retention limit, access and erasure. Location is personal data and is treated as confidential.
 
 ## Acceptance highlights
-- Alarm fires on time with the screen locked on both platforms.
-- The server cannot read any journey location or ETA.
-- A link viewer with no account sees live updates and the arrival status.
-- Revoking a share stops further updates reaching that viewer.
-- Works in any country; no feature requires a regional data feed.
+- The alarm rings at the chosen distance with the screen locked on Android and iOS.
+- With no armed alarm, the app makes no location requests.
+- Location is read once a minute during a journey.
+- A link viewer with no account sees a read-only, live journey that stops when the journey ends.
+- Only selected registered contacts receive push notifications.
+- Unit and temperature settings apply across the app.
 
 ## Risks
-- OS background-execution and battery limits can stop tracking; needs real-device testing.
-- Poor GPS in tunnels and indoors; ETA and trigger must tolerate gaps.
-- E2EE limits server-side behaviour (see ADR-0001), notably for a dead phone.
-- Global geocoding and routing provider cost, licensing and coverage.
-- Safety features carry real-world consequences; wording must not over-promise.
+- At high train speed (up to about 200 to 300 km/h), a one-minute check moves 3 to 5 km, so the 5 km alert can arrive with under a minute of warning, or be missed. Mitigation under consideration: check more often as the alert point nears, or register an OS geofence at the alert distance; see ADR-0002.
+- OS background-execution and battery limits can stop tracking; needs testing on real devices in both countries.
+- Straight-line distance can overstate how close a winding route is.
+- App-store review of background location use; Android requires a visible notification while tracking.
+- Weak GPS in tunnels or indoors.
+- Maps and geocoding provider cost, licensing and coverage for the UK and India.
 
 ## Out of scope for now
-Operator-specific rail/transit/airline data, in-app calling, social features, paid tiers.
+Other regions; operator-specific rail, transit or airline data; end-to-end encryption; in-app calling; paid tiers; destination temperature (planned).
 
 ## Roadmap
 Tracked as Feature work items on the Azure DevOps board (project `TravelBuddy`), not in this file.

@@ -10,38 +10,39 @@ Authority order: ADR > Technical-Context > Context.MD > Spec > Plan.
 | Platforms | Android and iOS (single codebase) |
 | Framework | Flutter (stable channel), Dart with sound null safety |
 | State management | Riverpod |
-| Location | `geolocator` (position stream, permissions) |
+| Location | `geolocator`; one reading per minute while a journey is active, none otherwise |
 | Alarm | Background service plus local notification and looping alarm audio; platform channels where a plugin cannot meet the requirement |
-| Maps, geocoding, routing | Behind provider interfaces; provider chosen by ADR before F1 build (global coverage required, see ADR-0002) |
-| Crypto | Audited libraries only (e.g. `cryptography`/libsodium bindings); no hand-rolled primitives (see ADR-0001) |
-| Backend | Ciphertext relay service plus push delivery; stack decided by ADR before F3 build |
-| Web viewer | Static client-side page that decrypts in the browser; no account, no cookies |
-| Local storage | Secure storage for keys; `shared_preferences` for settings |
+| Maps and geocoding | Behind provider interfaces; provider chosen by ADR before F1 build; must cover the UK and India |
+| Backend | Journey state service, web link viewer and push delivery; stack decided by ADR before F3 build |
+| Auth | Accounts for registered users (needed for push to selected contacts); method decided by ADR |
+| Push | FCM (Android) and APNs (iOS) |
+| Web viewer | Read-only page keyed by an unguessable journey link ID; no login |
+| Local storage | Platform secure storage for tokens; `shared_preferences` for settings (distance unit, temperature unit) |
 | Lint | `flutter_lints` plus `dart format` |
 
-Changing any row above needs an ADR in `docs/adr/`. Current ADRs: 0001 (E2EE sharing), 0002 (global ETA), both Proposed.
+Changing any row above needs an ADR in `docs/adr/`. Current ADRs: 0001 (journey sharing model), 0002 (distance-based alarm), both Accepted.
 
 ## Architecture principles
 
 - Feature-first layout: `lib/features/<feature>/{data,domain,presentation}`.
-- All distance, ETA, trigger and delay logic lives in pure Dart in `domain/` with no Flutter or plugin imports, so it is unit-testable without a device.
-- Platform services (location, audio, notifications, permissions, crypto, network) sit behind interfaces and are injected, so tests use fakes.
-- The alarm and tracking must work with the screen locked and the app backgrounded. Designs that need the foreground are non-compliant.
-- Journey events (started, near, arrived, SOS, low battery) are produced on the device, encrypted, then relayed. The server never derives them.
-- Battery: use the lowest accuracy and largest distance filter that meets the tolerance; raise accuracy as the destination nears.
+- Distance, trigger, ETA, delay and unit-conversion logic lives in pure Dart in `domain/` with no Flutter or plugin imports, so it is unit-testable without a device. Distances are stored in metres and converted only for display.
+- Platform services (location, audio, notifications, permissions, network) sit behind interfaces and are injected, so tests use fakes.
+- A journey exists only while an alarm is armed. With no armed alarm the app must not request location or run background work. SOS is the only user-initiated exception.
+- The alarm and tracking must work with the screen locked and the app backgrounded.
+- Battery: one reading per minute; use the lowest accuracy that meets the tolerance; any extra checks near the alert point are decided in the Spec and must stay bounded.
 - No feature may depend on a regional operator data feed.
 
 ## Secure-coding baseline
 
-- Location and journey data are personal data (CONFIDENTIAL). The server must only ever receive ciphertext for location, ETA, status and battery; plaintext coordinates must not appear in requests, logs, analytics or crash reports.
-- Encryption keys never leave the device except inside a share link fragment or wrapped to a contact's public key. Keys are never logged and are stored in the platform keystore.
-- Share links are unguessable, expire, and are revocable. Treat the link as a bearer secret.
-- Provider API queries (geocoding, routing) must not carry user identifiers.
-- Request the minimum permissions at point of use, with clear rationale; handle denial and "while in use only" gracefully.
-- No secrets in the repo; provider keys come from build-time configuration.
-- Validate all input (radius, lead time, coordinates, link contents).
-- Pin dependencies via `pubspec.lock`; review new dependencies, especially crypto and location.
-- GDPR: data minimisation, retention limits, access and erasure support.
+- Follow OWASP MASVS for the app and OWASP ASVS for the backend.
+- All network traffic over TLS (HTTPS only, HSTS on the web viewer). Stored data encrypted at rest by the hosting platform. Journey content is not end-to-end encrypted (ADR-0001); never describe it as such.
+- Location, contact and account data are personal data (CONFIDENTIAL) under UK GDPR and India DPDP: minimise, set retention, support access and erasure. No coordinates in logs, analytics or crash reports.
+- Link IDs are random, at least 128 bits, read-only, rate-limited and expire when the journey ends. Treat the link as a bearer secret.
+- Push notifications go only to registered contacts the traveller selected for that journey.
+- Auth tokens live in platform secure storage; no secrets in the repo; provider keys via build-time configuration.
+- Request the minimum permissions at point of use with clear rationale; handle denial and "while in use only" gracefully.
+- Validate all input (alert distance from the allowed set, coordinates in range, link IDs).
+- Pin dependencies via `pubspec.lock`; review new dependencies, especially location and auth.
 
 ## Testing & the ratchet
 
