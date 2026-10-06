@@ -11,28 +11,37 @@ Authority order: ADR > Technical-Context > Context.MD > Spec > Plan.
 | Framework | Flutter (stable channel), Dart with sound null safety |
 | State management | Riverpod |
 | Location | `geolocator` (position stream, permissions) |
-| Alarm | Foreground/background service plus local notification and looping alarm audio (`flutter_local_notifications`, `audioplayers`); platform channels where a plugin cannot meet the requirement |
-| Maps / destination picker | `flutter_map` with OpenStreetMap tiles (no API key); geocoding behind an interface so the provider can change |
-| Local storage | `shared_preferences` for settings; no backend in the MVP |
+| Alarm | Background service plus local notification and looping alarm audio; platform channels where a plugin cannot meet the requirement |
+| Maps, geocoding, routing | Behind provider interfaces; provider chosen by ADR before F1 build (global coverage required, see ADR-0002) |
+| Crypto | Audited libraries only (e.g. `cryptography`/libsodium bindings); no hand-rolled primitives (see ADR-0001) |
+| Backend | Ciphertext relay service plus push delivery; stack decided by ADR before F3 build |
+| Web viewer | Static client-side page that decrypts in the browser; no account, no cookies |
+| Local storage | Secure storage for keys; `shared_preferences` for settings |
 | Lint | `flutter_lints` plus `dart format` |
 
-Changing any row above needs an ADR in `docs/adr/`.
+Changing any row above needs an ADR in `docs/adr/`. Current ADRs: 0001 (E2EE sharing), 0002 (global ETA), both Proposed.
 
 ## Architecture principles
 
 - Feature-first layout: `lib/features/<feature>/{data,domain,presentation}`.
-- All distance and trigger logic lives in pure Dart in `domain/` with no Flutter or plugin imports, so it is unit-testable without a device.
-- Platform services (location, audio, notifications, permissions) sit behind interfaces and are injected, so tests use fakes.
-- The alarm must fire with the screen locked and the app backgrounded. Any design that depends on the app being in the foreground is non-compliant.
-- Battery: use the lowest location accuracy and the largest distance filter that still meets the trigger tolerance; increase accuracy only as the destination nears.
+- All distance, ETA, trigger and delay logic lives in pure Dart in `domain/` with no Flutter or plugin imports, so it is unit-testable without a device.
+- Platform services (location, audio, notifications, permissions, crypto, network) sit behind interfaces and are injected, so tests use fakes.
+- The alarm and tracking must work with the screen locked and the app backgrounded. Designs that need the foreground are non-compliant.
+- Journey events (started, near, arrived, SOS, low battery) are produced on the device, encrypted, then relayed. The server never derives them.
+- Battery: use the lowest accuracy and largest distance filter that meets the tolerance; raise accuracy as the destination nears.
+- No feature may depend on a regional operator data feed.
 
 ## Secure-coding baseline
 
-- Location is personal data. It never leaves the device in the MVP: no analytics, crash reporting or network call may include coordinates.
-- Request the minimum permissions, at the point of use, with a clear rationale string. Handle denial and "while in use only" gracefully.
-- No secrets in the repo. Map and geocoding providers needing keys read them from build-time configuration, never from source.
-- Validate all user input (radius bounds, coordinates in range).
-- Pin dependency versions via `pubspec.lock`; review new dependencies before adding.
+- Location and journey data are personal data (CONFIDENTIAL). The server must only ever receive ciphertext for location, ETA, status and battery; plaintext coordinates must not appear in requests, logs, analytics or crash reports.
+- Encryption keys never leave the device except inside a share link fragment or wrapped to a contact's public key. Keys are never logged and are stored in the platform keystore.
+- Share links are unguessable, expire, and are revocable. Treat the link as a bearer secret.
+- Provider API queries (geocoding, routing) must not carry user identifiers.
+- Request the minimum permissions at point of use, with clear rationale; handle denial and "while in use only" gracefully.
+- No secrets in the repo; provider keys come from build-time configuration.
+- Validate all input (radius, lead time, coordinates, link contents).
+- Pin dependencies via `pubspec.lock`; review new dependencies, especially crypto and location.
+- GDPR: data minimisation, retention limits, access and erasure support.
 
 ## Testing & the ratchet
 

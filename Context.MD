@@ -11,3 +11,14 @@
 - **Snooze** — the user silences the ringing temporarily; it re-rings after the snooze interval if still within the radius.
 - **Position fix** — one reading of the device location with accuracy and timestamp.
 - **Stale fix** — a position fix older than the freshness limit; never used to trigger or to suppress a trigger.
+- **Trusted contact** — a person the traveller shares a journey with. Either an *installed contact* (has the app) or a *link viewer* (web link only, no account).
+- **Share link** — an expiring URL whose fragment carries the journey key; anyone holding it can watch the journey.
+- **Journey key** — the random per-journey encryption key held by the traveller's device.
+- **Relay** — the backend that stores and forwards ciphertext; it cannot read journey content.
+- **Lead time** — how many minutes before estimated arrival the alarm should ring.
+- **ETA** — estimated time of arrival, computed on the device.
+- **Delay detection** — recognising that progress has slowed or the route changed, from the device's own signals.
+- **Safe arrival** — arrival at the destination, detected automatically or confirmed by the traveller, which notifies contacts and ends the share.
+- **SOS** — one-tap emergency action that shares location and alerts emergency contacts.
+- **Check-in** — an optional "Are you OK?" prompt; a missed one notifies contacts with the last known location.
+- **Coarse location** — a deliberately reduced-precision location shown when the traveller hides exact position.
