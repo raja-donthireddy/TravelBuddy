@@ -13,7 +13,7 @@ Authority order: ADR > Technical-Context > Context.MD > Spec > Plan.
 | Location | `geolocator`; about one reading per minute while a journey is active, faster only on final approach, none otherwise (ADR-0002); OS geofence at the alert distance |
 | Alarm | Background service plus local notification and looping alarm audio; platform channels where a plugin cannot meet the requirement |
 | Maps and place search | Google Maps Platform behind provider interfaces (ADR-0003): `google_maps_flutter`, Places, Geocoding; Maps JavaScript API on the web page |
-| Backend | ASP.NET Core (.NET LTS) in `backend/`, hosted in Azure (single deployment, UK South), Azure SQL Database with EF Core, secrets in Azure Key Vault (ADR-0004) |
+| Backend | ASP.NET Core (.NET LTS) in `backend/`, hosted in Azure (test: UK South; production: UK South plus Central India), Azure SQL Database with EF Core, secrets in Azure Key Vault (ADR-0004) |
 | Auth | Google, Apple, Microsoft and custom email/password; ASP.NET Core Identity; backend-issued tokens (ADR-0005) |
 | Push | FCM (Android) and APNs (iOS) |
 | Web viewer | Read-only page keyed by an unguessable journey link ID; no login |
