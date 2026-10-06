@@ -12,8 +12,9 @@ The original brief asked for end-to-end encrypted sharing. This is a test app fo
 3. **Lifetime.** The link works while the journey is active and stops when the journey ends or the traveller revokes it. Stored journey data is deleted after a retention period (default proposed: 24 hours after the journey ends, to be confirmed).
 4. **Server model.** The backend stores the journey state (plaintext) and sends pushes. Protection is TLS in transit and encryption at rest from the hosting platform.
 5. **Hide exact location.** The device reduces precision before upload when the traveller hides exact location.
-6. **Arrival on the web page.** The page polls or streams updates and shows the arrival status when reached.
-7. Standard industry practice applies: OWASP ASVS for the backend, rate limiting on link access, no identifiers in logs beyond what is needed.
+6. **Selecting contacts.** The traveller picks contacts with the platform's contact picker, which hands the app only the chosen contacts and needs no standing access to the address book. The app sends the chosen email address(es) to the backend, which matches them to verified account emails and stores a link to the matched user, not the raw contact details. Lookup requires sign-in, is rate-limited and never lists users. Unmatched contacts can be invited by a link sent through any messaging app.
+7. **Arrival on the web page.** The page polls or streams updates and shows the arrival status when reached.
+8. Standard industry practice applies: OWASP ASVS for the backend, rate limiting on link access, no identifiers in logs beyond what is needed.
 
 ## Consequences
 - Simple to build and operate; the server can send events and detect missed check-ins itself.

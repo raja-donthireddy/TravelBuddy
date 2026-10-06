@@ -13,7 +13,8 @@
 - **Registered contact** — a trusted contact who has a TravelBuddy account; the only kind that receives push notifications, and only when the traveller selects them.
 - **Link viewer** — a person with the web link only; read-only, no account, no push.
 - **Share link** — a read-only URL for one journey, with an unguessable ID; ends with the journey or on revoke.
-- **Backend** — the service that holds journey state, serves the web link and sends push notifications.
+- **Backend** — the .NET service, hosted in Azure with Azure SQL, that holds journey state, serves the web link and sends push notifications.
+- **Contact picker** — the phone's built-in screen for choosing contacts; gives the app only the chosen contacts.
 - **Alert distance** — how far from the destination the alarm should ring: a whole number from 1 to 100 in km or miles, chosen with a slider and a text box that stay in sync.
 - **Final approach** — the last few minutes before the alert point, when location checks speed up (15 to 60 seconds).
 - **Geofence** — an OS-level region at the alert distance that wakes the app if a reading is missed.

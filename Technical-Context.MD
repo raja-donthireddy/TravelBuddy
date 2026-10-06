@@ -13,10 +13,11 @@ Authority order: ADR > Technical-Context > Context.MD > Spec > Plan.
 | Location | `geolocator`; about one reading per minute while a journey is active, faster only on final approach, none otherwise (ADR-0002); OS geofence at the alert distance |
 | Alarm | Background service plus local notification and looping alarm audio; platform channels where a plugin cannot meet the requirement |
 | Maps and place search | Google Maps Platform behind provider interfaces (ADR-0003): `google_maps_flutter`, Places, Geocoding; Maps JavaScript API on the web page |
-| Backend | ASP.NET Core (.NET LTS) in `backend/` (ADR-0004); hosting and database to be decided |
+| Backend | ASP.NET Core (.NET LTS) in `backend/`, hosted in Azure, Azure SQL Database with EF Core, secrets in Azure Key Vault (ADR-0004) |
 | Auth | Google, Apple, Microsoft and custom email/password; ASP.NET Core Identity; backend-issued tokens (ADR-0005) |
 | Push | FCM (Android) and APNs (iOS) |
 | Web viewer | Read-only page keyed by an unguessable journey link ID; no login |
+| Contacts | Platform contact picker only (no standing address-book permission); chosen emails sent to the backend for matching (ADR-0001) |
 | Local storage | Platform secure storage for tokens; `shared_preferences` for settings (distance unit, temperature unit) |
 | Lint | `flutter_lints` plus `dart format` |
 
@@ -43,6 +44,8 @@ Repository layout: Flutter app in `mobile/`, .NET backend in `backend/`.
 - Push notifications go only to registered contacts the traveller selected for that journey.
 - Validate provider identity tokens fully (issuer, audience, signature, expiry); link accounts only on a verified email; store passwords only as salted hashes; Google Maps keys are restricted per platform.
 - Auth tokens live in platform secure storage; no secrets in the repo; provider keys via build-time configuration.
+- Contacts: use the platform contact picker so the app never holds address-book access; do not store raw contact details; contact lookup is authenticated, rate-limited and never returns lists.
+- Before building saved places, verify Google's terms on storing place data and coordinates (ADR-0003).
 - Request the minimum permissions at point of use with clear rationale; handle denial and "while in use only" gracefully.
 - Validate all input (alert distance from the allowed set, coordinates in range, link IDs).
 - Pin dependencies via `pubspec.lock`; review new dependencies, especially location and auth.

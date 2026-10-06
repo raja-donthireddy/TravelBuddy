@@ -29,7 +29,7 @@ A **journey** exists only while an alarm is armed. The app reads location **once
 - Sign in with **Google**, **Apple**, **Microsoft**, or a **custom account** (email and password with email verification and password reset).
 - Accounts are needed to be a registered contact and to receive push. Linking sign-in methods to one account only on a verified email.
 - In-app account deletion that removes the user's data.
-- Registered contacts: how a traveller finds and selects them is an open question (see Open questions).
+- Registered contacts are found through the phone's contact picker (see F3).
 
 ### F1. Smart Arrival Alarm (distance-based)
 - Destination search: cities, stations, airports, bus stations, postcodes, landmarks, saved places, dropped map pins.
@@ -52,7 +52,12 @@ A **journey** exists only while an alarm is armed. The app reads location **once
 
 ### F3. Journey sharing
 - **Web link:** read-only, valid for that one journey only. Share by SMS, email, WhatsApp, QR or any messaging app, at the traveller's choice. Anyone with the link can view; no account needed. The link stops working when the journey ends or the traveller revokes it.
-- **Registered contacts:** the traveller selects contacts from other registered users; only those selected receive push notifications.
+- **Registered contacts:** the traveller picks people with the phone's own contact picker. The app does not read the address book; it receives only the contact(s) the user chooses, and only when the user opens the picker.
+  - The chosen contact's email address(es) are sent over TLS to the backend, which checks them against verified account emails. A match is saved as a link to that user; the raw contact details are not kept.
+  - If there is no match, the app offers to invite the person by sending an invite link with a messaging app of the user's choice.
+  - Lookup is for signed-in users only, rate-limited, and never returns a list of users.
+  - Known limit: contacts with no email, or accounts using Apple's private relay email, will not match; they can still be invited or sent the web link.
+  - Only selected registered contacts receive push notifications.
 - Shown: location, remaining distance, progress, ETA, status, optional battery, last-updated time.
 - Contact dashboard: location, map, ETA, progress, remaining distance, arrival status, last update.
 
@@ -96,9 +101,7 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - App-store review of background location use; Android requires a visible notification while tracking.
 - Weak GPS in tunnels or indoors.
 - Google Maps Platform cost and terms: billing must be enabled, usage capped with quotas and budget alerts, and caching limits respected.
-
-## Open questions
-- **Finding contacts:** how does a traveller select another registered user? Options: by email address, by invite code or QR, or from a contact list. Needs a decision before F3.
+- **Note for saved places:** Google's terms limit how long place data and coordinates may be stored; store the place ID and refresh coordinates. Verify the current terms before building saved places (see ADR-0003).
 
 ## Out of scope for now
 Other regions; operator-specific rail, transit or airline data; end-to-end encryption; in-app calling; paid tiers; destination temperature (planned).

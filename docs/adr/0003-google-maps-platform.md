@@ -14,6 +14,9 @@ The app needs destination search (cities, stations, airports, postcodes, landmar
 6. **Terms:** follow Google Maps Platform terms. As currently understood, Places data and coordinates have caching limits while place IDs may be stored, so saved places should store the place ID and refresh coordinates. Verify against current terms before building saved places.
 7. The alarm itself calls no Google API; it uses the device's location and straight-line distance.
 
+## Note: saved places and Google's terms
+Before the **saved places** feature is built, check the current Google Maps Platform terms on storing and caching place data and coordinates. Working assumption, to be verified: store only the place ID (and the user's own label) and re-fetch coordinates and details when needed, rather than keeping Google-supplied coordinates or place details for long. The same check applies to the destination of an active journey and to any history of past journeys. The Spec for saved places must record the outcome of this check.
+
 ## Consequences
 - Strong coverage in the UK and India.
 - Ongoing cost and quota management.

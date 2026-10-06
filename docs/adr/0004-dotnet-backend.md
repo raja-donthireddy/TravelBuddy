@@ -1,6 +1,6 @@
 # ADR-0004: .NET backend
 
-- **Status:** Accepted for language and framework; hosting and database to be decided
+- **Status:** Accepted (product owner decision, 2026-10-06)
 - **Date:** 2026-10-06
 
 ## Decision
@@ -10,8 +10,11 @@
 4. Domain logic stays free of framework dependencies and is unit-tested; API tests run against a test host.
 5. Checks before every PR: `dotnet format --verify-no-changes`, `dotnet build`, `dotnet test`.
 
-## Open
-- Hosting and database. Recommendation to evaluate: Azure App Service with Azure Database for PostgreSQL or Azure SQL, with managed encryption at rest and TLS. Decide in a follow-up ADR before the sharing Feature.
+## Hosting and data
+- Hosted in **Azure**. Database: **Azure SQL Database** (SQL Server engine), accessed with Entity Framework Core.
+- TLS only; encryption at rest through Azure SQL transparent data encryption (on by default); secrets in Azure Key Vault, not in source or app settings files; managed identity for database access where possible.
+- Choose UK South as the primary region for the UK test, and confirm data location for India users against DPDP before launch. Specific Azure services (App Service or Container Apps, Notification Hubs or direct push) are chosen in the Plan for the first backend Story.
+- Retention: scheduled job deletes journey data per ADR-0001.
 
 ## Consequences
 - One language for backend and web page; separate Flutter and .NET toolchains in one repository.
