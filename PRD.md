@@ -13,12 +13,12 @@ Travellers by train, bus, car and public transport fall asleep and miss their st
 - Defaults come from device region (miles in the UK, kilometres in India) and can be changed in settings.
 
 ## Users
-Daily commuter, business traveller, student sharing with parents, elderly traveller, solo traveller. A **trusted contact** is the second user type:
-- a **registered contact**: has the TravelBuddy app and an account; can receive push notifications;
+Daily commuter, business traveller, student sharing with parents, elderly traveller, solo traveller. The second user type is a person who follows a journey, in one of two forms:
+- a **designated contact**: has the TravelBuddy app and an account; can receive push notifications;
 - a **link viewer**: has only a web link; read-only; no account.
 
 ## Primary scenario
-A traveller picks one or more destinations, chooses an alert distance for each (for example "alert me 10 km before"), and selects a registered contact to notify. For London to Middlesbrough with a bus change in Leeds, they set one alarm for Leeds and one for Middlesbrough. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At each chosen distance a loud alarm rings and a notification shows. If the traveller changes route and skips a stop, the later alarms still ring and the skipped stop is marked skipped. On arrival at the final destination (detected or confirmed) the selected contact is notified "arrived safely", the link shows the arrival status, and the journey ends.
+A traveller picks one or more destinations, chooses an alert distance for each (for example "alert me 10 km before"), and selects a designated contact to notify. For London to Middlesbrough with a bus change in Leeds, they set one alarm for Leeds and one for Middlesbrough. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At each chosen distance a loud alarm rings and a notification shows. If the traveller changes route and skips a stop, the later alarms still ring and the skipped stop is marked skipped. On arrival at the final destination (detected or confirmed) the selected contact is notified "arrived safely", the link shows the arrival status, and the journey ends.
 
 ## Core principle: minimal use of the phone
 A **journey** exists only while at least one of its alarms is live. The app reads location **once a minute** while a journey is active, and not at all otherwise, except for short, more frequent checks on the final approach to the alert point (see ADR-0002). Sharing, battery, check-in and arrival detection are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
@@ -27,9 +27,9 @@ A **journey** exists only while at least one of its alarms is live. The app read
 
 ### F0. Accounts and sign-in
 - Sign in with **Google**, **Apple**, **Microsoft**, or a **custom account** (email and password with email verification and password reset).
-- Accounts are needed to be a registered contact and to receive push. Linking sign-in methods to one account only on a verified email.
+- Accounts are needed to be a designated contact and to receive push. Linking sign-in methods to one account only on a verified email.
 - In-app account deletion that removes the user's data.
-- Registered contacts are found through the phone's contact picker (see F3).
+- Designated contacts are found through the phone's contact picker (see F3).
 
 ### F1. Smart Arrival Alarm (distance-based, one or more alarms per journey)
 - A journey holds **one to ten alarms**, each with its own destination and alert distance; the last is the final destination.
@@ -56,22 +56,22 @@ A **journey** exists only while at least one of its alarms is live. The app read
 
 ### F3. Journey sharing
 - **Web link:** read-only, valid for that one journey only. Share by SMS, email, WhatsApp, QR or any messaging app, at the traveller's choice. Anyone with the link can view; no account needed. The link stops working when the journey ends or the traveller revokes it.
-- **Registered contacts:** the traveller picks people with the phone's own contact picker. The app does not read the address book; it receives only the contact(s) the user chooses, and only when the user opens the picker.
+- **Designated contacts:** the traveller picks people with the phone's own contact picker. The app does not read the address book; it receives only the contact(s) the user chooses, and only when the user opens the picker.
   - The chosen contact's email address(es) are sent over TLS to the backend, which checks them against verified account emails. A match is saved as a link to that user; the raw contact details are not kept.
   - If there is no match, the app offers to invite the person by sending an invite link with a messaging app of the user's choice.
   - Lookup is for signed-in users only, rate-limited, and never returns a list of users.
   - Known limit: contacts with no email, or accounts using Apple's private relay email, will not match; they can still be invited or sent the web link.
-  - Only selected registered contacts receive push notifications.
+  - Only designated contacts receive push notifications.
 - Shown: location, remaining distance, ETA, the status of each alarm (waiting, rung, skipped), optional battery, last-updated time.
 - Contact dashboard: location, map, ETA, progress, remaining distance, arrival status, last update.
 
 ### F4. Safe-arrival notifications
-Journey started, near destination, arrived safely, sharing ended. "Arrived safely" refers to the final destination. A skipped stop is shown in the journey status and sends no push. Push goes to **selected registered contacts only**. Link viewers see the status change on the page when the final destination is reached.
+Journey started, near destination, arrived safely, sharing ended. "Arrived safely" refers to the final destination. A skipped stop is shown in the journey status and sends no push. Push goes to **designated contacts only**. Link viewers see the status change on the page when the final destination is reached.
 
 ### F5. Family safety
-- **SOS:** one tap shares current location, alerts the selected registered contacts, opens emergency-call actions, and tracks until cancelled. TravelBuddy does not contact emergency services.
-- **Check-ins:** optional "Are you OK?" prompts during a journey; if unanswered, selected registered contacts are notified with the last known location.
-- **Low battery:** selected registered contacts are notified at configurable thresholds.
+- **SOS:** one tap shares current location, alerts the designated contacts, opens emergency-call actions, and tracks until cancelled. TravelBuddy does not contact emergency services.
+- **Check-ins:** optional "Are you OK?" prompts during a journey; if unanswered, designated contacts are notified with the last known location.
+- **Low battery:** designated contacts are notified at configurable thresholds.
 
 ### F6. Smart Delay Detection
 Identify slowed or stopped progress from the device's movement and flag a changed ETA. Indicates that progress slowed, not why. No operator feeds. (No other AI features specified.)
@@ -83,7 +83,7 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - All traffic over TLS; stored data encrypted at rest by the hosting platform. **Journey content is not end-to-end encrypted** (decision recorded in ADR-0001). The privacy notice and UI must not claim it is.
 - Web link carries an unguessable random identifier, grants read-only access to one journey, and is rate-limited.
 - Push notifications go only to registered users the traveller has selected.
-- Role-based access: traveller (owner), registered contact (view and notifications), link viewer (view only).
+- Role-based access: traveller (owner), designated contact (view and notifications), link viewer (view only).
 - Follow OWASP MASVS (mobile) and ASVS (backend).
 - Sign-in uses the providers' official sign-in flows; passwords for custom accounts are stored only as salted hashes; sessions use short-lived tokens.
 - The privacy notice must also say that destination search and maps are provided by Google and what is sent to Google.
@@ -97,7 +97,7 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - Location is read about once a minute during a journey, more often only on the final approach to the alert point, and never without an armed alarm.
 - The alert-distance slider and text box stay in sync in both directions.
 - A link viewer with no account sees a read-only, live journey that stops when the journey ends.
-- Only selected registered contacts receive push notifications.
+- Only designated contacts receive push notifications.
 - Unit and temperature settings apply across the app.
 
 ## Risks

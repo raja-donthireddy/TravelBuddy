@@ -75,6 +75,9 @@ A read-only web address for one Journey, with an unguessable identifier. Works w
 ## Backend
 The .NET service, hosted in Azure with Azure SQL, that holds Journey state, serves the Share link page and sends push notifications.
 
+## Low battery alert
+A notification to the Designated contacts when the Traveller's device battery falls to a threshold the Traveller has configured. Sent only while a Journey is active. Not a Check-in.
+
 ## Check-in
 An optional "Are you OK?" prompt during a Journey. If unanswered, the Designated contacts are notified with the last known location.
 
