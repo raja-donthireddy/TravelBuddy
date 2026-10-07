@@ -65,7 +65,7 @@ The state of an Alarm that is sounding and waiting for Dismiss or Snooze.
 The Traveller's action that stops a Ringing Alarm. Not Skipped, which applies to an Alarm that never rang.
 
 **Snooze**:
-The Traveller's action that silences a Ringing Alarm temporarily. The Alarm rings again after five minutes if the device is still within its Alert distance.
+The Traveller's action that silences a Ringing Alarm temporarily. The Alarm rings again after five minutes, wherever the device is, until the Traveller chooses Dismiss.
 
 **Final approach**:
 The last few minutes before the device comes within an Alert distance, in which location checks are more frequent (15 to 60 seconds). Not the whole Journey.
