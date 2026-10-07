@@ -1,13 +1,16 @@
 # Domain Glossary
 
 ## Traveller
-The signed-in person making a Journey. Not a Designated contact (who follows a Journey but does not make it) and not a Link viewer.
+The person making a Journey. Not a Designated contact (who follows a Journey but does not make it) and not a Link viewer.
 
 ## Designated contact
 A person with a TravelBuddy account whom the Traveller has selected for a Journey. The only person who receives its push notifications, Check-in alerts, SOS alerts and low-battery alerts. Not a Link viewer, who is never designated, has no account and receives no push.
 
 ## Link viewer
 A person who has only a Share link. Can watch one Journey read-only, has no account and receives no push. Not a Designated contact.
+
+## Account
+A person's TravelBuddy identity, reached through one or more sign-in methods linked on a verified email. Required to be a Designated contact and to share a Journey with one. Not required to make a Journey. Not a Link viewer, who has none.
 
 ## Contact picker
 The phone's built-in screen for choosing contacts. Gives TravelBuddy only the contacts the Traveller chooses; it is not standing access to the address book.
