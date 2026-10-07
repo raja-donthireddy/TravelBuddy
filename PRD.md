@@ -128,7 +128,7 @@ Family safety
 Privacy and security
 
 83. As a Traveller, I want all traffic over TLS and stored data encrypted at rest, with the app never claiming Journey content is end-to-end encrypted, so that the promise matches the reality.
-84. As a Traveller, I want link expiry, instant revoke, data retention controls, and data subject access and erasure, so that I control my data under UK GDPR and the India DPDP Act.
+84. As an account holder, I want link expiry, instant revoke, data retention controls, and data subject access and erasure, so that I control my data under UK GDPR and the India DPDP Act. Requests are accepted only from signed-in account holders; no request is taken from a Traveller with no Account.
 85. As a Traveller, I want Role-based access (Traveller as owner, Designated contact to view and receive notifications, Link viewer to view only), so that each person sees only what their role allows.
 86. As a Traveller, I want the privacy notice to say that destination search and maps are provided by Google and what is sent to Google, and that location is read about once a minute only while a Journey is active, so that I know what happens to my data.
 87. As a Traveller, I want Share link access to be rate-limited and to avoid identifiers in logs beyond what is needed, so that the link cannot be abused.
@@ -152,7 +152,7 @@ Acceptance behaviours (each is a testable requirement)
 - **Saved places are held as references to the place, with coordinates refreshed.** Reason: Google's terms limit how long place data and coordinates may be stored, so only the place ID and the Traveller's own label are kept. The Google terms check must happen before Saved places are built.
 - **A Journey template is stored on the device only.** Reason: it needs no Account, keeps nothing server-side, and holds no Designated contacts or position history, so no standing record of who the Traveller shares with or where they have been.
 - **Starting a Journey from a template re-checks each Saved place and has the Traveller confirm the current Destinations.** Reason: a station can be renamed or closed, and an Alarm must never point at a stale place.
-- **A Traveller needs no Account.** An Account is required to be a Designated contact and to share a Journey with one. A Traveller with no Account cannot delete data in the app, because the app holds no identifying details for them.
+- **A Traveller needs no Account.** An Account is required to be a Designated contact and to share a Journey with one. A Traveller with no Account cannot delete data in the app, because the app holds no identifying details for them, and TravelBuddy takes no erasure or access requests from unregistered users. Their Journey data is removed by the retention period after the Journey ends.
 - **Designated contacts are chosen per Journey through the Contact picker.** The app receives only the chosen contacts. Their email addresses are sent over TLS to the backend, matched to verified account emails, and stored as a link to the matched user, not as raw contact details. Reason: minimisation under UK GDPR and the India DPDP Act. Contacts that do not match can be invited with an Invite link.
 - **The Share link ends with an ended page, not an error, and a revoked link shows nothing.** Reason: a dead link looks like a failure to a worried viewer, while an ended page says the Traveller has woken. A revoked link is a deliberate withdrawal of access.
 - **Journey content is not end-to-end encrypted.** The backend stores Journey state in plaintext, with TLS in transit and platform encryption at rest, and the privacy notice must not claim otherwise. Reason: the product owner chose a simple read-only link for a test app.
@@ -184,6 +184,7 @@ Acceptance behaviours (each is a testable requirement)
 - Paid tiers.
 - Arrival detection and any "arrived safely" message.
 - Journey history, and keeping Designated contacts in a Journey template.
+- Erasure and access requests from unregistered users (a Traveller with no Account).
 - Backing Journey templates up to an Account.
 - An "updates stopped" alert to contacts.
 - Destination temperature display (planned, not yet built).
