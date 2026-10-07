@@ -24,6 +24,9 @@ The Destination of the last Alarm of a Journey. Reaching it is Arrival; it is no
 ## Destination
 A place the Traveller wants to be alerted near, identified by a map position and an optional label. Not an Alert distance, and not a Journey.
 
+## Saved place
+A place the Traveller has kept for reuse, held as a reference to the place rather than a copy of its position, so that its position is current whenever it is used as a Destination. Not a Destination, which belongs to one Alarm.
+
 ## Alert distance
 The straight-line distance from a Destination at or inside which an Alarm rings. A whole number from 1 to 100 in the Distance unit. Not the distance remaining; that is Distance remaining.
 
