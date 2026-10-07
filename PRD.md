@@ -18,10 +18,10 @@ Daily commuter, business traveller, student sharing with parents, elderly travel
 - a **link viewer**: has only a web link; read-only; no account.
 
 ## Primary scenario
-A traveller picks a destination, chooses "alert me 10 km before", and selects a registered contact to notify. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At the chosen distance a loud alarm rings and a notification shows. On arrival (detected or confirmed) the selected contact is notified "arrived safely", the link shows the arrival status, and the journey ends.
+A traveller picks one or more destinations, chooses an alert distance for each (for example "alert me 10 km before"), and selects a registered contact to notify. For London to Middlesbrough with a bus change in Leeds, they set one alarm for Leeds and one for Middlesbrough. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At each chosen distance a loud alarm rings and a notification shows. If the traveller changes route and skips a stop, the later alarms still ring and the skipped stop is marked skipped. On arrival at the final destination (detected or confirmed) the selected contact is notified "arrived safely", the link shows the arrival status, and the journey ends.
 
 ## Core principle: minimal use of the phone
-A **journey** exists only while an alarm is armed. The app reads location **once a minute** while a journey is active, and not at all otherwise, except for short, more frequent checks on the final approach to the alert point (see ADR-0002). Sharing, battery, check-in and arrival detection are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
+A **journey** exists only while at least one of its alarms is live. The app reads location **once a minute** while a journey is active, and not at all otherwise, except for short, more frequent checks on the final approach to the alert point (see ADR-0002). Sharing, battery, check-in and arrival detection are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
 
 ## Features
 
@@ -31,7 +31,11 @@ A **journey** exists only while an alarm is armed. The app reads location **once
 - In-app account deletion that removes the user's data.
 - Registered contacts are found through the phone's contact picker (see F3).
 
-### F1. Smart Arrival Alarm (distance-based)
+### F1. Smart Arrival Alarm (distance-based, one or more alarms per journey)
+- A journey holds **one to ten alarms**, each with its own destination and alert distance; the last is the final destination.
+- **Every alarm is live from the start** and rings once when the device comes within its alert distance. Order is for display only (ADR-0006).
+- If a later alarm rings first, or the final destination is reached, earlier alarms that have not rung are marked **skipped**; the traveller can also skip one by hand.
+- Arrival at the final destination: within 300 m, or the traveller taps "I've arrived".
 - Destination search: cities, stations, airports, bus stations, postcodes, landmarks, saved places, dropped map pins.
 - Alert distance before the destination, in the chosen unit (kilometres or miles), default 10:
   - a **slider from 1 to 100**, with a **text box** beside it showing the value;
@@ -46,7 +50,7 @@ A **journey** exists only while an alarm is armed. The app reads location **once
 
 ### F2. Live Journey Tracking
 - Current location, remaining distance, progress %, speed, indicative ETA, map with position and destination (route line optional).
-- Traveller dashboard: destination, ETA, distance remaining, location, alarm countdown (distance to alert point), sharing status, battery, progress %.
+- Traveller dashboard: next stop and final destination, ETA, distance remaining to each, location, alarm status (waiting, rung, skipped), sharing status, battery.
 - Updates once a minute.
 - **Future:** show the destination's temperature in the chosen unit.
 
@@ -58,11 +62,11 @@ A **journey** exists only while an alarm is armed. The app reads location **once
   - Lookup is for signed-in users only, rate-limited, and never returns a list of users.
   - Known limit: contacts with no email, or accounts using Apple's private relay email, will not match; they can still be invited or sent the web link.
   - Only selected registered contacts receive push notifications.
-- Shown: location, remaining distance, progress, ETA, status, optional battery, last-updated time.
+- Shown: location, remaining distance, ETA, the status of each alarm (waiting, rung, skipped), optional battery, last-updated time.
 - Contact dashboard: location, map, ETA, progress, remaining distance, arrival status, last update.
 
 ### F4. Safe-arrival notifications
-Journey started, near destination, arrived safely, sharing ended. Push goes to **selected registered contacts only**. Link viewers see the status change on the page when the destination is reached.
+Journey started, near destination, arrived safely, sharing ended. "Arrived safely" refers to the final destination. A skipped stop is shown in the journey status and sends no push. Push goes to **selected registered contacts only**. Link viewers see the status change on the page when the final destination is reached.
 
 ### F5. Family safety
 - **SOS:** one tap shares current location, alerts the selected registered contacts, opens emergency-call actions, and tracks until cancelled. TravelBuddy does not contact emergency services.
@@ -86,8 +90,10 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - UK GDPR and India DPDP Act apply to location and contact data: lawful basis, minimisation, retention limit, access and erasure. Location is personal data and is treated as confidential.
 
 ## Acceptance highlights
-- The alarm rings at the chosen distance with the screen locked on Android and iOS.
-- With no armed alarm, the app makes no location requests.
+- Each alarm rings at its chosen distance with the screen locked on Android and iOS.
+- With alarms for Leeds and Middlesbrough, a route that never reaches Leeds still rings the Middlesbrough alarm, and Leeds is marked skipped.
+- A journey accepts at most 10 alarms.
+- With no live alarm, the app makes no location requests.
 - Location is read about once a minute during a journey, more often only on the final approach to the alert point, and never without an armed alarm.
 - The alert-distance slider and text box stay in sync in both directions.
 - A link viewer with no account sees a read-only, live journey that stops when the journey ends.

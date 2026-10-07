@@ -2,6 +2,7 @@
 
 - **Status:** Accepted (product owner decision, 2026-10-06)
 - **Supersedes:** earlier proposal for time-based, ETA-driven alerts.
+- **Amended by:** ADR-0006 (a journey can hold several alarms; where this ADR says "the alarm" it applies to each alarm, and the check interval follows the nearest live alarm).
 
 ## Context
 The original brief used "N minutes before arrival". The product owner chose distance in kilometres or miles, selectable from 1 to 100 with a slider and a synchronised text box. The app is for the UK and India and must use the phone as little as possible.
