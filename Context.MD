@@ -72,6 +72,9 @@ One reading of the device location with its accuracy and time.
 ## Stale fix
 A Position fix older than the freshness limit. Never used to make an Alarm ring or to hold one back.
 
+## Dashboard
+The live view of one Journey. The Traveller's version shows the Journey's Alarms and the sharing status; a Designated contact's or Link viewer's version is read-only. Not the Journey itself.
+
 ## Share link
 A read-only web address for one Journey, with an unguessable identifier. Works while the Journey is active and until revoked. Not an account, and gives its holder no other access.
 
