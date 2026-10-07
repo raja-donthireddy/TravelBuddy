@@ -98,7 +98,7 @@ The .NET service, hosted in Azure with Azure SQL, that holds Journey state, serv
 A notification to the Designated contacts when the Traveller's device battery falls to a threshold the Traveller has configured. Sent only while a Journey is active. Not a Check-in.
 
 **Check-in**:
-An optional "Are you OK?" prompt during a Journey. If unanswered, the Designated contacts are notified with the last known location.
+An optional "Are you OK?" prompt during a Journey, issued only while the Traveller is expected to answer. If unanswered, the Designated contacts are notified with the last known location.
 
 **SOS**:
 A one-tap emergency action started by the Traveller that shares location and alerts the Designated contacts until cancelled. It is the only use of location that does not need a live Alarm. Not a call to emergency services.

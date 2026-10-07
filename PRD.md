@@ -70,7 +70,7 @@ Journey started, near destination, sharing ended. "Near destination" is sent whe
 
 ### F5. Family safety
 - **SOS:** one tap shares current location, alerts the designated contacts, opens emergency-call actions, and tracks until cancelled. TravelBuddy does not contact emergency services.
-- **Check-ins:** optional "Are you OK?" prompts during a journey; if unanswered, designated contacts are notified with the last known location.
+- **Check-ins:** optional "Are you OK?" prompts during a journey, issued only while the traveller is expected to answer; if unanswered, designated contacts are notified with the last known location.
 - **Low battery:** designated contacts are notified at configurable thresholds.
 
 ### F6. Smart Delay Detection
