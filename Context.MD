@@ -20,7 +20,7 @@ A person's TravelBuddy identity, reached through one or more sign-in methods lin
 The phone's built-in screen for choosing contacts. Gives TravelBuddy only the contacts the Traveller chooses; it is not standing access to the address book.
 
 **Journey**:
-One trip by a Traveller, made up of one to ten Alarms. Ends when the Final destination is reached or the Traveller cancels it. Not a single Alarm: London to Middlesbrough with a change in Leeds is one Journey with two Alarms.
+One trip by a Traveller, made up of one to ten Alarms. Ends when the Traveller dismisses the Alarm of the Final destination, or cancels it. Not a single Alarm: London to Middlesbrough with a change in Leeds is one Journey with two Alarms.
 
 **Alarm**:
 One Destination together with one Alert distance, belonging to a Journey. Not the whole Journey, and not the ringing itself. Every Alarm of a Journey is live from the start, and an Alarm is waiting, rung or skipped.
@@ -62,7 +62,7 @@ The state of an Alarm that is sounding and waiting for Dismiss or Snooze.
 The Traveller's action that stops a Ringing Alarm. Not Skipped, which applies to an Alarm that never rang.
 
 **Snooze**:
-The Traveller's action that silences a Ringing Alarm temporarily. The Alarm rings again after the snooze interval if the device is still within its Alert distance.
+The Traveller's action that silences a Ringing Alarm temporarily. The Alarm rings again after five minutes if the device is still within its Alert distance.
 
 **Arrival**:
 The device being within the arrival radius (300 m) of the Final destination, or the Traveller confirming it. Not an Alarm ringing, which happens earlier. Arrival ends the Journey.
