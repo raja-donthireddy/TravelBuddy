@@ -18,6 +18,7 @@ TravelBuddy is currently a test app for the UK and India. The items below were c
 
 ## Product and engineering
 - Tune the final-approach check intervals and battery rules on real devices on trains and buses in both countries (ADR-0002).
+- **A silent phone cannot ring or report.** If the phone's battery dies or it has no signal, the final Alarm cannot ring and the Designated contacts see only the last position and "last updated" time. The Low battery alert (before the phone dies) and "last updated" are the only signals. No "updates stopped" alert goes to contacts, because it would fire falsely in tunnels and dead zones, and Check-ins are paused under Sleep mode. Accepted for the test app; revisit before production with real-device data on dropout rates.
 - Contact matching limits: contacts without an email, and Apple private-relay emails, do not match.
 - Security: independent security review of sign-in, contact lookup and web link access; penetration test before launch.
 - Destination temperature display (planned) and any further AI features are not yet specified.
