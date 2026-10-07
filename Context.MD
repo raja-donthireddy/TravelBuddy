@@ -26,7 +26,7 @@ One trip by a Traveller, made up of one to ten Alarms. Ends when the Traveller d
 One Destination together with one Alert distance, belonging to a Journey. Not the whole Journey, and not the ringing itself. Every Alarm of a Journey is live from the start, and an Alarm is waiting, rung or skipped.
 
 **Final destination**:
-The Destination of the last Alarm of a Journey. Reaching it is Arrival; it is not the Destination of any earlier Alarm.
+The Destination of the last Alarm of a Journey. Dismissing its Alarm ends the Journey; it is not the Destination of any earlier Alarm.
 
 **Destination**:
 A place the Traveller wants to be alerted near, identified by a single map position and an optional label. A point, not an area: the Alert distance is measured from that point, so a large place such as a city is one position. Not an Alert distance, and not a Journey.
@@ -46,6 +46,9 @@ The indicative estimated time of arrival, shown for information. It never decide
 **Next stop**:
 The Waiting Alarm whose Destination comes first in the Journey's display order. Not the Final destination unless it is the only Alarm still Waiting.
 
+**Live**:
+The state of an Alarm that is Waiting or Ringing. Not Rung or Skipped, which are finished.
+
 **Waiting**:
 The state of an Alarm that has not yet rung and has not been skipped.
 
@@ -53,7 +56,7 @@ The state of an Alarm that has not yet rung and has not been skipped.
 The state of an Alarm that has rung once. An Alarm rings at most once, apart from Snooze.
 
 **Skipped**:
-The state of an Alarm that never rang because a later Alarm rang first, the Final destination was reached, or the Traveller skipped it by hand. A Skipped Alarm never rings. Not Dismiss, which stops a ringing Alarm.
+The state of an Alarm that never rang because a later Alarm rang first or the Traveller skipped it by hand. A Skipped Alarm never rings. Not Dismiss, which stops a ringing Alarm.
 
 **Ringing**:
 The state of an Alarm that is sounding and waiting for Dismiss or Snooze.
@@ -63,12 +66,6 @@ The Traveller's action that stops a Ringing Alarm. Not Skipped, which applies to
 
 **Snooze**:
 The Traveller's action that silences a Ringing Alarm temporarily. The Alarm rings again after five minutes if the device is still within its Alert distance.
-
-**Arrival**:
-The device being within the arrival radius (300 m) of the Final destination, or the Traveller confirming it. Not an Alarm ringing, which happens earlier. Arrival ends the Journey.
-
-**Safe arrival**:
-Arrival as reported to the Designated contacts as "arrived safely". Not a notification for a stop before the Final destination.
 
 **Final approach**:
 The last few minutes before the device comes within an Alert distance, in which location checks are more frequent (15 to 60 seconds). Not the whole Journey.

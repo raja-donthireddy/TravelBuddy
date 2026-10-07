@@ -18,10 +18,10 @@ Daily commuter, business traveller, student sharing with parents, elderly travel
 - a **link viewer**: has only a web link; read-only; no account.
 
 ## Primary scenario
-A traveller picks one or more destinations, chooses an alert distance for each (for example "alert me 10 km before"), and selects a designated contact to notify. For London to Middlesbrough with a bus change in Leeds, they set one alarm for Leeds and one for Middlesbrough. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At each chosen distance a loud alarm rings and a notification shows. If the traveller changes route and skips a stop, the later alarms still ring and the skipped stop is marked skipped. On arrival at the final destination (detected or confirmed) the selected contact is notified "arrived safely", the link shows the arrival status, and the journey ends.
+A traveller picks one or more destinations, chooses an alert distance for each (for example "alert me 10 km before"), and selects a designated contact to notify. For London to Middlesbrough with a bus change in Leeds, they set one alarm for Leeds and one for Middlesbrough. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At each chosen distance a loud alarm rings and a notification shows. If the traveller changes route and skips a stop, the later alarms still ring and the skipped stop is marked skipped. When the final alarm rings, the designated contact is notified that the traveller is near the destination. When the traveller dismisses it, the journey ends and the link shows the journey as ended.
 
 ## Core principle: minimal use of the phone
-A **journey** exists only while at least one of its alarms is live. The app reads location **once a minute** while a journey is active, and not at all otherwise, except for short, more frequent checks on the final approach to the alert point (see ADR-0002). Sharing, battery, check-in and arrival detection are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
+A **journey** exists only while at least one of its alarms is live. The app reads location **once a minute** while a journey is active, and not at all otherwise, except for short, more frequent checks on the final approach to the alert point (see ADR-0002). Sharing, battery and check-in are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
 
 ## Features
 
@@ -34,8 +34,8 @@ A **journey** exists only while at least one of its alarms is live. The app read
 ### F1. Smart Arrival Alarm (distance-based, one or more alarms per journey)
 - A journey holds **one to ten alarms**, each with its own destination and alert distance; the last is the final destination.
 - **Every alarm is live from the start** and rings once when the device comes within its alert distance. Order is for display only (ADR-0006).
-- If a later alarm rings first, or the final destination is reached, earlier alarms that have not rung are marked **skipped**; the traveller can also skip one by hand.
-- Arrival at the final destination: within 300 m, or the traveller taps "I've arrived".
+- If a later alarm rings first, or the final destination's alarm rings, earlier alarms that have not rung are marked **skipped**; the traveller can also skip one by hand.
+- The journey ends when the traveller dismisses the final destination's alarm, or cancels the journey.
 - Destination search: cities, stations, airports, bus stations, postcodes, landmarks, saved places, dropped map pins.
 - Alert distance before the destination, in the chosen unit (kilometres or miles), default 10:
   - a **slider from 1 to 100**, with a **text box** beside it showing the value;
@@ -45,7 +45,7 @@ A **journey** exists only while at least one of its alarms is live. The app read
   - switching the unit keeps the same physical distance, rounded to a whole number and clamped to 1 to 100.
 - Distance is the straight-line distance remaining to the destination.
 - Destination search and map use Google Maps.
-- Rings with the screen locked and the app in the background; dismiss and snooze.
+- Rings with the screen locked and the app in the background; dismiss, or snooze for five minutes.
 - **Settings:** distance unit (km / miles); temperature unit (°C / °F).
 
 ### F2. Live Journey Tracking
@@ -63,10 +63,10 @@ A **journey** exists only while at least one of its alarms is live. The app read
   - Known limit: contacts with no email, or accounts using Apple's private relay email, will not match; they can still be invited or sent the web link.
   - Only designated contacts receive push notifications.
 - Shown: location, remaining distance, ETA, the status of each alarm (waiting, rung, skipped), optional battery, last-updated time.
-- Contact dashboard: location, map, ETA, progress, remaining distance, arrival status, last update.
+- Contact dashboard: location, map, ETA, progress, remaining distance, journey status, last update.
 
-### F4. Safe-arrival notifications
-Journey started, near destination, arrived safely, sharing ended. "Arrived safely" refers to the final destination. A skipped stop is shown in the journey status and sends no push. Push goes to **designated contacts only**. Link viewers see the status change on the page when the final destination is reached.
+### F4. Journey notifications
+Journey started, near destination, sharing ended. "Near destination" is sent when the final destination's alarm rings. A skipped stop is shown in the journey status and sends no push. Push goes to **designated contacts only**. Link viewers see the page change to ended when the journey ends.
 
 ### F5. Family safety
 - **SOS:** one tap shares current location, alerts the designated contacts, opens emergency-call actions, and tracks until cancelled. TravelBuddy does not contact emergency services.

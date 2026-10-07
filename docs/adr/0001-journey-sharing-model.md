@@ -1,7 +1,7 @@
 ---
 status: accepted
 date: 2026-10-06
-decides: "Designated contacts are the only push recipients, selected per journey and needing an account; the Share link is read-only, unguessable and for one journey; link lifetime, revocation and retention of stored journey data; plaintext server storage with TLS and platform encryption at rest; exact-location hiding on the device; selecting contacts through the Contact picker with backend email matching and invite by link; arrival status on the web page; OWASP ASVS and rate limiting"
+decides: "Designated contacts are the only push recipients, selected per journey and needing an account; the Share link is read-only, unguessable and for one journey; link lifetime, revocation and retention of stored journey data; plaintext server storage with TLS and platform encryption at rest; exact-location hiding on the device; selecting contacts through the Contact picker with backend email matching and invite by link; journey ended status on the web page; OWASP ASVS and rate limiting"
 applies-to:
   - Designated contact
   - Link viewer
@@ -11,11 +11,9 @@ applies-to:
   - Coarse location
   - Contact picker
   - Invite link
-  - Arrival
   - Account
   - Traveller
   - Dashboard
-  - Safe arrival
 
 ---
 
@@ -34,7 +32,7 @@ The original brief asked for end-to-end encrypted sharing. This is a test app fo
 4. **Server model.** The backend stores the journey state (plaintext) and sends pushes. Protection is TLS in transit and encryption at rest from the hosting platform.
 5. **Hide exact location.** The device reduces precision before upload when the traveller hides exact location.
 6. **Selecting contacts.** The traveller picks contacts with the platform's contact picker, which hands the app only the chosen contacts and needs no standing access to the address book. The app sends the chosen email address(es) to the backend, which matches them to verified account emails and stores a link to the matched user, not the raw contact details. Lookup requires sign-in, is rate-limited and never lists users. Unmatched contacts can be invited by a link sent through any messaging app.
-7. **Arrival on the web page.** The page polls or streams updates and shows the arrival status when reached.
+7. **Journey end on the web page.** The page polls or streams updates and shows the journey as ended when the traveller dismisses the final alarm or cancels.
 8. Standard industry practice applies: OWASP ASVS for the backend, rate limiting on link access, no identifiers in logs beyond what is needed.
 
 ## Consequences
