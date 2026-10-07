@@ -75,6 +75,9 @@ A Position fix older than the freshness limit. Never used to make an Alarm ring 
 ## Share link
 A read-only web address for one Journey, with an unguessable identifier. Works while the Journey is active and until revoked. Not an account, and gives its holder no other access.
 
+## Invite link
+A general invitation to the app, sent by the Traveller through a messaging app to someone with no TravelBuddy account. Not tied to a Journey, and not a Share link, which shows one Journey and needs no account.
+
 ## Backend
 The .NET service, hosted in Azure with Azure SQL, that holds Journey state, serves the Share link page and sends push notifications.
 
