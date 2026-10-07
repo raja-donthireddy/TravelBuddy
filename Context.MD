@@ -53,19 +53,19 @@ The state of an Alarm that is Waiting or Ringing. Not Rung or Skipped, which are
 The state of an Alarm that has not yet rung and has not been skipped.
 
 **Rung**:
-The state of an Alarm that has rung once. An Alarm rings at most once, apart from Snooze.
+The state of an Alarm that has finished ringing: dismissed, or silenced because the Alarm of the Final destination was snoozed or dismissed. An Alarm starts ringing once; Snooze repeats the ring within the same Ringing state.
 
 **Skipped**:
 The state of an Alarm that never rang because a later Alarm rang first or the Traveller skipped it by hand. The Alarm of the Final destination is never Skipped. A Skipped Alarm never rings. Not Dismiss, which stops a ringing Alarm.
 
 **Ringing**:
-The state of an Alarm that is sounding and waiting for Dismiss or Snooze.
+The state of an Alarm from the moment it starts ringing until it is dismissed or silenced, whether it is sounding or silent between Snoozes. It is waiting for Dismiss or Snooze.
 
 **Dismiss**:
 The Traveller's action that stops a Ringing Alarm. Dismissing the Alarm of the Final destination also silences every other Alarm, snoozed or ringing, and ends the Journey. Not Skipped, which applies to an Alarm that never rang.
 
 **Snooze**:
-The Traveller's action that silences a Ringing Alarm temporarily. The Alarm rings again after five minutes, wherever the device is, until the Traveller chooses Dismiss. Snoozing the Alarm of the Final destination silences every other Alarm that is snoozed or ringing; they do not ring again and are Rung.
+The Traveller's action that silences a Ringing Alarm for five minutes. The Alarm stays Ringing. The Alarm rings again after five minutes, wherever the device is, until the Traveller chooses Dismiss. Snoozing the Alarm of the Final destination silences every other Alarm that is snoozed or ringing; they do not ring again and are Rung.
 
 **Final approach**:
 The last few minutes before the device comes within an Alert distance, in which location checks are more frequent (15 to 60 seconds). Not the whole Journey.
