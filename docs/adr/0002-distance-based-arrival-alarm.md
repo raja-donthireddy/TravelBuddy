@@ -1,3 +1,26 @@
+---
+status: accepted
+date: 2026-10-06
+decides: "Straight-line distance triggers an Alarm; location read about once a minute only while a journey is active, until the final alarm is dismissed; one trigger per arming and Stale fix handling; ETA for display and Delay detection only; distance and temperature units with metres stored; battery-aware check interval on Final approach; Geofence safety net; Alert distance range and slider and text box input"
+applies-to:
+  - Alarm
+  - Alert distance
+  - Distance remaining
+  - ETA
+  - Position fix
+  - Stale fix
+  - Final approach
+  - Geofence
+  - Distance unit
+  - Temperature unit
+  - Journey
+  - Destination
+  - Delay detection
+  - Rung
+  - Waiting
+
+---
+
 # ADR-0002: Distance-based arrival alarm
 
 - **Status:** Accepted (product owner decision, 2026-10-06)
@@ -9,7 +32,7 @@ The original brief used "N minutes before arrival". The product owner chose dist
 
 ## Decision
 1. The alarm triggers when the straight-line (great-circle) distance to the destination is at or below the chosen alert distance. No routing provider is needed for the alarm.
-2. Location is read about once a minute while an alarm is armed; never otherwise. The only exception is the final approach to the alert point (item 6).
+2. Location is read and shared about once a minute while a journey is active, which includes the time after the final alarm first rings and until it is dismissed or the journey is cancelled; never otherwise. The only exception is the final approach to the alert point (item 6).
 3. The trigger fires once per arming. A reading older than a freshness limit does not trigger or suppress a trigger.
 4. ETA is for display and delay detection only. It is indicative, derived from smoothed speed and remaining distance.
 5. Units: distance in km or miles, temperature in °C or °F, both user settings with defaults from device region. Distances are stored in metres internally.

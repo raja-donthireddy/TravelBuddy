@@ -30,7 +30,7 @@ Repository layout: Flutter app in `mobile/`, .NET backend in `backend/`.
 - Feature-first layout: `lib/features/<feature>/{data,domain,presentation}`.
 - Distance, trigger, ETA, delay and unit-conversion logic lives in pure Dart in `domain/` with no Flutter or plugin imports, so it is unit-testable without a device. Distances are stored in metres and converted only for display.
 - Platform services (location, audio, notifications, permissions, network) sit behind interfaces and are injected, so tests use fakes.
-- A journey exists only while an alarm is armed. With no armed alarm the app must not request location or run background work. SOS is the only user-initiated exception.
+- A journey is active from its start until the traveller dismisses the final alarm or cancels it. Outside an active journey the app must not request location or run background work. SOS is the only user-initiated exception.
 - The alarm and tracking must work with the screen locked and the app backgrounded.
 - Battery: about one reading per minute; checks speed up only on the final approach, bounded between 15 and 60 seconds, and slow down when battery is low (ADR-0002). Use balanced accuracy until the final approach.
 - No feature may depend on a regional operator data feed.
@@ -41,7 +41,7 @@ Repository layout: Flutter app in `mobile/`, .NET backend in `backend/`.
 - All network traffic over TLS (HTTPS only, HSTS on the web viewer). Stored data encrypted at rest by the hosting platform. Journey content is not end-to-end encrypted (ADR-0001); never describe it as such.
 - Location, contact and account data are personal data (CONFIDENTIAL) under UK GDPR and India DPDP: minimise, set retention, support access and erasure. No coordinates in logs, analytics or crash reports.
 - Link IDs are random, at least 128 bits, read-only, rate-limited and expire when the journey ends. Treat the link as a bearer secret.
-- Push notifications go only to registered contacts the traveller selected for that journey.
+- Push notifications go only to designated contacts the traveller selected for that journey.
 - Validate provider identity tokens fully (issuer, audience, signature, expiry); link accounts only on a verified email; store passwords only as salted hashes; Google Maps keys are restricted per platform.
 - Auth tokens live in platform secure storage; no secrets in the repo; provider keys via build-time configuration.
 - Contacts: use the platform contact picker so the app never holds address-book access; do not store raw contact details; contact lookup is authenticated, rate-limited and never returns lists.

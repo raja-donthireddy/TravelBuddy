@@ -1,3 +1,19 @@
+---
+status: accepted
+date: 2026-10-06
+decides: "Google Maps Platform for mobile map, Places search and Geocoding; Maps JavaScript API on the web link page; separate restricted keys per platform; cost controls and session tokens; no user identifier sent to Google; Google terms on caching and Saved place storage of place IDs; the Alarm calls no Google API"
+applies-to:
+  - Destination
+  - Saved place
+  - Share link
+  - Backend
+  - Alarm
+  - Journey
+  - Dashboard
+  - Traveller
+
+---
+
 # ADR-0003: Google Maps Platform for maps and place search
 
 - **Status:** Accepted (product owner decision, 2026-10-06)
