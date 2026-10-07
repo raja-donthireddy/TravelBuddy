@@ -56,7 +56,7 @@ The state of an Alarm that has not yet rung and has not been skipped.
 The state of an Alarm that has rung once. An Alarm rings at most once, apart from Snooze.
 
 **Skipped**:
-The state of an Alarm that never rang because a later Alarm rang first or the Traveller skipped it by hand. A Skipped Alarm never rings. Not Dismiss, which stops a ringing Alarm.
+The state of an Alarm that never rang because a later Alarm rang first or the Traveller skipped it by hand. The Alarm of the Final destination is never Skipped. A Skipped Alarm never rings. Not Dismiss, which stops a ringing Alarm.
 
 **Ringing**:
 The state of an Alarm that is sounding and waiting for Dismiss or Snooze.

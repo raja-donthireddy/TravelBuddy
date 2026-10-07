@@ -34,7 +34,7 @@ A **journey** exists only while at least one of its alarms is live. The app read
 ### F1. Smart Arrival Alarm (distance-based, one or more alarms per journey)
 - A journey holds **one to ten alarms**, each with its own destination and alert distance; the last is the final destination.
 - **Every alarm is live from the start** and rings once when the device comes within its alert distance. Order is for display only (ADR-0006).
-- If a later alarm rings first, or the final destination's alarm rings, earlier alarms that have not rung are marked **skipped**; the traveller can also skip one by hand.
+- If a later alarm rings first, or the final destination's alarm rings, earlier alarms that have not rung are marked **skipped**; the traveller can also skip an earlier one by hand. The final destination's alarm cannot be skipped; to stop it the traveller cancels the journey.
 - The journey ends when the traveller dismisses the final destination's alarm, or cancels the journey.
 - Destination search: cities, stations, airports, bus stations, postcodes, landmarks, saved places, dropped map pins.
 - Alert distance before the destination, in the chosen unit (kilometres or miles), default 10:
