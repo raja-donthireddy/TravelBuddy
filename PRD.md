@@ -50,7 +50,7 @@ A **journey** is active from its start until the traveller dismisses the final d
 
 ### F2. Live Journey Tracking
 - Current location, remaining distance, progress %, speed, indicative ETA, map with position and destination (route line optional).
-- Traveller dashboard: next stop and final destination, ETA, distance remaining to each, location, alarm status (waiting, ringing, rung, skipped), sharing status, battery.
+- Traveller dashboard: next stop and final destination, ETA, distance remaining to each, location, alarm status (waiting, ringing, snoozed, rung, skipped), sharing status, battery.
 - Updates once a minute.
 - **Future:** show the destination's temperature in the chosen unit.
 
@@ -62,7 +62,7 @@ A **journey** is active from its start until the traveller dismisses the final d
   - Lookup is for signed-in users only, rate-limited, and never returns a list of users.
   - Known limit: contacts with no email, or accounts using Apple's private relay email, will not match; they can still be invited or sent the web link.
   - Only designated contacts receive push notifications.
-- Shown: location, remaining distance, ETA, the status of each alarm (waiting, ringing, rung, skipped), optional battery, last-updated time.
+- Shown: location, remaining distance, ETA, the status of each alarm (waiting, ringing, snoozed, rung, skipped), optional battery, last-updated time.
 - Contact dashboard: location, map, ETA, progress, remaining distance, journey status, last update.
 
 ### F4. Journey notifications
