@@ -39,6 +39,9 @@ The straight-line distance from the current position to a Destination. Not the l
 ## ETA
 The indicative estimated time of arrival, shown for information. It never decides when an Alarm rings.
 
+## Next stop
+The Waiting Alarm whose Destination comes first in the Journey's display order. Not the Final destination unless it is the only Alarm still Waiting.
+
 ## Waiting
 The state of an Alarm that has not yet rung and has not been skipped.
 
