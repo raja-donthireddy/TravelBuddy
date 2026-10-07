@@ -22,9 +22,6 @@ The phone's built-in screen for choosing contacts. Gives TravelBuddy only the co
 **Journey**:
 One trip by a Traveller, made up of one to ten Alarms. A Traveller has at most one active Journey at a time. Ends when the Traveller dismisses the Alarm of the Final destination, or cancels it. Not a single Alarm: London to Middlesbrough with a change in Leeds is one Journey with two Alarms.
 
-**Journey template**:
-A reusable plan kept by the Traveller on the device: a name, the ordered Destinations as Saved places, and an Alert distance for each. Starting a Journey from it re-checks each Saved place and has the Traveller confirm the current Destinations first, where they may edit Destinations and Alert distances within the one to ten Alarm limit. The Journey template is unchanged unless the Traveller saves the changes. Not a Journey, which is one live trip. Holds no Designated contacts and no position history.
-
 **Alarm**:
 One Destination together with one Alert distance, belonging to a Journey. Not the whole Journey, and not the ringing itself. Every Alarm of a Journey is live from the start, and an Alarm is waiting, rung or skipped.
 
