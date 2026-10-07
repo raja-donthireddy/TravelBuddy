@@ -1,3 +1,24 @@
+---
+status: accepted
+date: 2026-10-06
+decides: "Designated contacts are the only push recipients, selected per journey and needing an account; the Share link is read-only, unguessable and for one journey; link lifetime, revocation and retention of stored journey data; plaintext server storage with TLS and platform encryption at rest; exact-location hiding on the device; selecting contacts through the Contact picker with backend email matching and invite by link; arrival status on the web page; OWASP ASVS and rate limiting"
+applies-to:
+  - Designated contact
+  - Link viewer
+  - Share link
+  - Journey
+  - Backend
+  - Coarse location
+  - Contact picker
+  - Invite link
+  - Arrival
+  - Account
+  - Traveller
+  - Dashboard
+  - Safe arrival
+
+---
+
 # ADR-0001: Journey sharing model
 
 - **Status:** Accepted (product owner decision, 2026-10-06)

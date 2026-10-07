@@ -1,3 +1,17 @@
+---
+status: accepted
+date: 2026-10-06
+decides: "Sign-in options Google, Apple, Microsoft and custom email and password; identity token validation and short-lived backend tokens; custom account security; linking Accounts only on a verified email; Apple sign-in; in-app Account deletion; the Share link page needs no sign-in"
+applies-to:
+  - Account
+  - Share link
+  - Link viewer
+  - Traveller
+  - Designated contact
+  - Backend
+
+---
+
 # ADR-0005: Authentication and accounts
 
 - **Status:** Accepted (product owner decision, 2026-10-06)

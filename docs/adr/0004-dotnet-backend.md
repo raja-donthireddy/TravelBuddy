@@ -1,3 +1,18 @@
+---
+status: accepted
+date: 2026-10-06
+decides: "ASP.NET Core backend on current .NET LTS; backend responsibilities for accounts, journey state, contact selection, push and the web link page; web link page served by the backend and polling about once a minute; framework-free domain logic with unit tests; checks before every PR; Azure hosting with Azure SQL, regions and secrets handling; production deployment split by country"
+applies-to:
+  - Backend
+  - Share link
+  - Account
+  - Journey
+  - Designated contact
+  - Dashboard
+  - Link viewer
+
+---
+
 # ADR-0004: .NET backend
 
 - **Status:** Accepted (product owner decision, 2026-10-06)

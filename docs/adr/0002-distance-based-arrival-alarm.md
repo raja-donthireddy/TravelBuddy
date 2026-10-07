@@ -1,3 +1,26 @@
+---
+status: accepted
+date: 2026-10-06
+decides: "Straight-line distance triggers an Alarm; location read about once a minute only while armed; one trigger per arming and Stale fix handling; ETA for display and Delay detection only; distance and temperature units with metres stored; battery-aware check interval on Final approach; Geofence safety net; Alert distance range and slider and text box input"
+applies-to:
+  - Alarm
+  - Alert distance
+  - Distance remaining
+  - ETA
+  - Position fix
+  - Stale fix
+  - Final approach
+  - Geofence
+  - Distance unit
+  - Temperature unit
+  - Journey
+  - Destination
+  - Delay detection
+  - Rung
+  - Waiting
+
+---
+
 # ADR-0002: Distance-based arrival alarm
 
 - **Status:** Accepted (product owner decision, 2026-10-06)

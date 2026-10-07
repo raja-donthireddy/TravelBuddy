@@ -1,3 +1,27 @@
+---
+status: accepted
+date: 2026-10-07
+decides: "A Journey holds one or more Alarms with own Destination and Alert distance; every Alarm live from the start with display-only order; Skipped Alarms and manual skip; Journey end on Arrival or cancel; contacts see Alarm states and the Next stop and push refers to the Final destination; one reading checked against every live Alarm with a ten Alarm cap and a Geofence each; ring screen shows which Alarm rang"
+applies-to:
+  - Journey
+  - Alarm
+  - Final destination
+  - Skipped
+  - Rung
+  - Waiting
+  - Ringing
+  - Next stop
+  - Designated contact
+  - Arrival
+  - Safe arrival
+  - Geofence
+  - Final approach
+  - Dashboard
+  - Destination
+  - Alert distance
+
+---
+
 # ADR-0006: Journeys with multiple alarms
 
 - **Status:** Accepted (product owner decision, 2026-10-07)
