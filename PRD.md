@@ -70,7 +70,7 @@ Journey started, near destination, sharing ended. "Near destination" is sent whe
 
 ### F5. Family safety
 - **SOS:** one tap shares current location, alerts the designated contacts, opens emergency-call actions, and tracks until cancelled. TravelBuddy does not contact emergency services.
-- **Check-ins:** optional "Are you OK?" prompts during a journey, issued only while the traveller has not set **sleep mode**, a traveller-set state that pauses check-ins until the traveller turns it off or the first alarm rings, never inferred by the app, and not a pause on alarms, sharing or SOS. When sleep mode is switched on, the app states plainly that check-ins are paused and the designated contacts will not be alerted if the traveller does not respond; this limit is accepted; if unanswered, designated contacts are notified with the last known location.
+- **Check-ins:** optional "Are you OK?" prompts during a journey; if unanswered, designated contacts are notified with the last known location. Prompts are issued only while the traveller has not set **sleep mode**, a traveller-set state that pauses check-ins until the traveller turns it off or the first alarm rings. It is never inferred by the app and does not pause alarms, sharing or SOS. When sleep mode is switched on, the app states plainly that check-ins are paused and the designated contacts will not be alerted if the traveller does not respond; this limit is accepted.
 - **Low battery:** designated contacts are notified at configurable thresholds.
 
 ### F6. Smart Delay Detection
