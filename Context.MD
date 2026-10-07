@@ -62,7 +62,7 @@ The state of an Alarm that never rang because a later Alarm rang first or the Tr
 The state of an Alarm that is sounding and waiting for Dismiss or Snooze.
 
 **Dismiss**:
-The Traveller's action that stops a Ringing Alarm. Not Skipped, which applies to an Alarm that never rang.
+The Traveller's action that stops a Ringing Alarm. Dismissing the Alarm of the Final destination also silences every other Alarm, snoozed or ringing, and ends the Journey. Not Skipped, which applies to an Alarm that never rang.
 
 **Snooze**:
 The Traveller's action that silences a Ringing Alarm temporarily. The Alarm rings again after five minutes, wherever the device is, until the Traveller chooses Dismiss.

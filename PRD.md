@@ -45,7 +45,7 @@ A **journey** exists only while at least one of its alarms is live. The app read
   - switching the unit keeps the same physical distance, rounded to a whole number and clamped to 1 to 100.
 - Distance is the straight-line distance remaining to the destination.
 - Destination search and map use Google Maps.
-- Rings with the screen locked and the app in the background; dismiss, or snooze for five minutes. A snoozed alarm always rings again after five minutes, wherever the device is, until the traveller dismisses it.
+- Rings with the screen locked and the app in the background; dismiss, or snooze for five minutes. A snoozed alarm always rings again after five minutes, wherever the device is, until the traveller dismisses it. Dismissing the final destination's alarm also silences every other alarm, snoozed or ringing, and ends the journey.
 - **Settings:** distance unit (km / miles); temperature unit (°C / °F).
 
 ### F2. Live Journey Tracking
