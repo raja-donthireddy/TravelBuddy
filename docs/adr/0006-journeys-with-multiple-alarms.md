@@ -1,7 +1,7 @@
 ---
 status: accepted
 date: 2026-10-07
-decides: "A Journey holds one or more Alarms with own Destination and Alert distance; every Alarm live from the start with display-only order; Skipped Alarms and manual skip; Journey end when the Final destination Alarm is dismissed or on cancel; contacts see Alarm states and the Next stop and push refers to the Final destination; one reading checked against every live Alarm with a ten Alarm cap and a Geofence each; ring screen shows which Alarm rang"
+decides: "A Traveller has at most one active Journey at a time; a Journey holds one or more Alarms with own Destination and Alert distance; every Alarm live from the start with display-only order; Skipped Alarms and manual skip; Journey end when the Final destination Alarm is dismissed or on cancel; contacts see Alarm states and the Next stop and push refers to the Final destination; one reading checked against every live Alarm with a ten Alarm cap and a Geofence each; ring screen shows which Alarm rang"
 applies-to:
   - Journey
   - Alarm
@@ -35,7 +35,7 @@ A single trip can have several stops that matter, for example London to Middlesb
 3. **Skipping.** When a later alarm rings first, or the final destination's alarm rings, every earlier alarm that has not rung is marked skipped and never rings. The traveller can also skip an earlier alarm by hand. The final destination's alarm cannot be skipped; the traveller cancels the journey instead.
 4. A journey ends when the traveller dismisses the final destination's alarm, or when the traveller cancels it. Snoozing or dismissing it silences every other alarm that is snoozed or ringing, and those do not ring again; only the final alarm rings again after a snooze, and no alarm rings once the journey has ended. There is no arrival detection and no "arrived safely" message.
 5. **Contacts** see each alarm's status (waiting, ringing, snoozed, rung, skipped) and the next stop. Push notifications "started" and "near destination" refer to the journey and its final destination; "near destination" is sent when the final alarm rings. A skip produces no push; it is shown in the journey status only.
-6. **Monitoring.** One location reading is compared with every live alarm. The check interval follows the nearest live alarm under ADR-0002. Each live alarm gets its own OS geofence. A journey holds at most 10 alarms, to stay inside the geofence limit on iPhones.
+6. **Monitoring.** One location reading is compared with every live alarm. The check interval follows the nearest live alarm under ADR-0002. Each live alarm gets its own OS geofence. A traveller has at most one active journey at a time. A journey holds at most 10 alarms, to stay inside the geofence limit on iPhones.
 7. The ring screen shows which alarm rang and, if earlier alarms have not rung, says so ("Middlesbrough is 20 km away. Leeds not reached yet.").
 
 ## Consequences

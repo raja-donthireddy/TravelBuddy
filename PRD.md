@@ -32,6 +32,7 @@ A **journey** is active from its start until the traveller dismisses the final d
 - Designated contacts are found through the phone's contact picker (see F3).
 
 ### F1. Smart Arrival Alarm (distance-based, one or more alarms per journey)
+- A traveller has at most **one active journey** at a time; starting another requires ending or cancelling the current one.
 - A journey holds **one to ten alarms**, each with its own destination and alert distance; the last is the final destination.
 - **Every alarm is live from the start** and rings once when the device comes within its alert distance. Order is for display only (ADR-0006).
 - If a later alarm rings first, or the final destination's alarm rings, earlier alarms that have not rung are marked **skipped**; the traveller can also skip an earlier one by hand. The final destination's alarm cannot be skipped; to stop it the traveller cancels the journey.
@@ -93,6 +94,7 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - Each alarm rings at its chosen distance with the screen locked on Android and iOS.
 - With alarms for Leeds and Middlesbrough, a route that never reaches Leeds still rings the Middlesbrough alarm, and Leeds is marked skipped.
 - A journey accepts at most 10 alarms.
+- A traveller has at most one active journey at a time; starting another requires ending or cancelling the current one.
 - With no active journey, the app makes no location requests.
 - Location is read about once a minute during a journey, more often only on the final approach to the alert point, and never without an active journey.
 - The alert-distance slider and text box stay in sync in both directions.

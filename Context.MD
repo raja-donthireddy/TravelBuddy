@@ -20,7 +20,7 @@ A person's TravelBuddy identity, reached through one or more sign-in methods lin
 The phone's built-in screen for choosing contacts. Gives TravelBuddy only the contacts the Traveller chooses; it is not standing access to the address book.
 
 **Journey**:
-One trip by a Traveller, made up of one to ten Alarms. Ends when the Traveller dismisses the Alarm of the Final destination, or cancels it. Not a single Alarm: London to Middlesbrough with a change in Leeds is one Journey with two Alarms.
+One trip by a Traveller, made up of one to ten Alarms. A Traveller has at most one active Journey at a time. Ends when the Traveller dismisses the Alarm of the Final destination, or cancels it. Not a single Alarm: London to Middlesbrough with a change in Leeds is one Journey with two Alarms.
 
 **Alarm**:
 One Destination together with one Alert distance, belonging to a Journey. Not the whole Journey, and not the ringing itself. Every Alarm of a Journey is live from the start, and an Alarm is waiting, rung or skipped.
