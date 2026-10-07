@@ -86,7 +86,7 @@ A Position fix older than the freshness limit. Never used to make an Alarm ring 
 The live view of one Journey. The Traveller's version shows the Journey's Alarms and the sharing status; a Designated contact's or Link viewer's version is read-only. Not the Journey itself.
 
 **Share link**:
-A read-only web address for one Journey, with an unguessable identifier. Works while the Journey is active and until revoked. Not an account, and gives its holder no other access.
+A read-only web address for one Journey, with an unguessable identifier. Shows the live Journey while it is active, a bare ended page with no location or Alarm details after the Journey ends, and nothing once revoked. Not an account, and gives its holder no other access.
 
 **Invite link**:
 A general invitation to the app, sent by the Traveller through a messaging app to someone with no TravelBuddy account. Not tied to a Journey, and not a Share link, which shows one Journey and needs no account.

@@ -56,7 +56,7 @@ A **journey** is active from its start until the traveller dismisses the final d
 - **Future:** show the destination's temperature in the chosen unit.
 
 ### F3. Journey sharing
-- **Web link:** read-only, valid for that one journey only. Share by SMS, email, WhatsApp, QR or any messaging app, at the traveller's choice. Anyone with the link can view; no account needed. The link stops working when the journey ends or the traveller revokes it.
+- **Web link:** read-only, valid for that one journey only. Share by SMS, email, WhatsApp, QR or any messaging app, at the traveller's choice. Anyone with the link can view; no account needed. While the journey is active the link shows it live. When the journey ends the link shows a plain "This journey has ended" page with no location, map or alarm details, until stored journey data is deleted. When the traveller revokes it the link stops working and shows nothing about the journey.
 - **Designated contacts:** the traveller picks people with the phone's own contact picker. The app does not read the address book; it receives only the contact(s) the user chooses, and only when the user opens the picker.
   - The chosen contact's email address(es) are sent over TLS to the backend, which checks them against verified account emails. A match is saved as a link to that user; the raw contact details are not kept.
   - If there is no match, the app offers to invite the person by sending an invite link with a messaging app of the user's choice.
@@ -98,7 +98,7 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - With no active journey, the app makes no location requests.
 - Location is read about once a minute during a journey, more often only on the final approach to the alert point, and never without an active journey.
 - The alert-distance slider and text box stay in sync in both directions.
-- A link viewer with no account sees a read-only, live journey that stops when the journey ends.
+- A link viewer with no account sees a read-only, live journey, then a plain ended page once the journey ends; a revoked link shows nothing.
 - Only designated contacts receive push notifications.
 - Unit and temperature settings apply across the app.
 
