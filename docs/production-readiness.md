@@ -6,7 +6,7 @@ TravelBuddy is currently a test app for the UK and India. The items below were c
 - **Two production deployments.** Test runs as one deployment in UK South. Production is UK South for the UK and Central India for India (ADR-0004). Before production: design cross-region sharing (a UK traveller sharing with an Indian contact and the reverse), account and contact lookup across regions, and which region holds a journey.
 - **Laws to assess:** UK GDPR and India DPDP Act for location, contact and account data (lawful basis, minimisation, retention, access, erasure, children's data).
 - **DPIA** for continuous location sharing, and a review of the retention default (24 hours after a journey ends, ADR-0001).
-- **Privacy notice** content: location read about once a minute and faster only near the alert point; nothing read without an armed alarm (SOS excepted); Google processes search and map usage; journey content is not end-to-end encrypted; the contact-matching flow.
+- **Privacy notice** content: location read about once a minute and faster only near the alert point; nothing read outside an active journey (SOS excepted); Google processes search and map usage; journey content is not end-to-end encrypted; the contact-matching flow.
 - **Processor agreements** with Google, Azure and push providers; third-party contact data (the people a user picks from their contacts).
 - **Account deletion** removes all user data, including links to other users' contacts.
 

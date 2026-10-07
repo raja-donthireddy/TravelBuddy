@@ -30,7 +30,7 @@ Repository layout: Flutter app in `mobile/`, .NET backend in `backend/`.
 - Feature-first layout: `lib/features/<feature>/{data,domain,presentation}`.
 - Distance, trigger, ETA, delay and unit-conversion logic lives in pure Dart in `domain/` with no Flutter or plugin imports, so it is unit-testable without a device. Distances are stored in metres and converted only for display.
 - Platform services (location, audio, notifications, permissions, network) sit behind interfaces and are injected, so tests use fakes.
-- A journey exists only while an alarm is armed. With no armed alarm the app must not request location or run background work. SOS is the only user-initiated exception.
+- A journey is active from its start until the traveller dismisses the final alarm or cancels it. Outside an active journey the app must not request location or run background work. SOS is the only user-initiated exception.
 - The alarm and tracking must work with the screen locked and the app backgrounded.
 - Battery: about one reading per minute; checks speed up only on the final approach, bounded between 15 and 60 seconds, and slow down when battery is low (ADR-0002). Use balanced accuracy until the final approach.
 - No feature may depend on a regional operator data feed.

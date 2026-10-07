@@ -21,7 +21,7 @@ Daily commuter, business traveller, student sharing with parents, elderly travel
 A traveller picks one or more destinations, chooses an alert distance for each (for example "alert me 10 km before"), and selects a designated contact to notify. For London to Middlesbrough with a bus change in Leeds, they set one alarm for Leeds and one for Middlesbrough. They may also send a web link by SMS, email, WhatsApp or any messaging app. During the trip the app updates position, remaining distance and indicative ETA once a minute. The contact follows along. At each chosen distance a loud alarm rings and a notification shows. If the traveller changes route and skips a stop, the later alarms still ring and the skipped stop is marked skipped. When the final alarm rings, the designated contact is notified that the traveller is near the destination. When the traveller dismisses it, the journey ends and the link shows the journey as ended.
 
 ## Core principle: minimal use of the phone
-A **journey** exists only while at least one of its alarms is live. The app reads location **once a minute** while a journey is active, and not at all otherwise, except for short, more frequent checks on the final approach to the alert point (see ADR-0002). Sharing, battery and check-in are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
+A **journey** is active from its start until the traveller dismisses the final destination's alarm or cancels it. The app reads and shares location **once a minute** while a journey is active, including after the final alarm first rings and until it is dismissed, and not at all otherwise, except for short, more frequent checks on the final approach to the alert point (see ADR-0002). Sharing, battery and check-in are all part of an active journey. The only exception is SOS, which is started by the user and runs until cancelled. This is stated in the privacy notice.
 
 ## Features
 
@@ -93,8 +93,8 @@ Share one journey only; link expiry and instant revoke; choose what is shared (i
 - Each alarm rings at its chosen distance with the screen locked on Android and iOS.
 - With alarms for Leeds and Middlesbrough, a route that never reaches Leeds still rings the Middlesbrough alarm, and Leeds is marked skipped.
 - A journey accepts at most 10 alarms.
-- With no live alarm, the app makes no location requests.
-- Location is read about once a minute during a journey, more often only on the final approach to the alert point, and never without an armed alarm.
+- With no active journey, the app makes no location requests.
+- Location is read about once a minute during a journey, more often only on the final approach to the alert point, and never without an active journey.
 - The alert-distance slider and text box stay in sync in both directions.
 - A link viewer with no account sees a read-only, live journey that stops when the journey ends.
 - Only designated contacts receive push notifications.
