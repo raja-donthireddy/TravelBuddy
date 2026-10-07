@@ -21,7 +21,7 @@ Authority order: ADR > Technical-Context > Context.MD > Spec > Plan.
 | Local storage | Platform secure storage for tokens; `shared_preferences` for settings (distance unit, temperature unit) |
 | Lint | `flutter_lints` plus `dart format` |
 
-Changing any row above needs an ADR in `docs/adr/`. Current ADRs: 0001 journey sharing, 0002 distance-based alarm, 0003 Google Maps, 0004 .NET backend, 0005 authentication.
+Changing any row above needs an ADR in `docs/adr/`. Current ADRs: 0001 journey sharing, 0002 distance-based alarm, 0003 Google Maps, 0004 .NET backend, 0005 authentication, 0006 journeys with multiple alarms.
 
 Repository layout: Flutter app in `mobile/`, .NET backend in `backend/`.
 
@@ -40,7 +40,7 @@ Repository layout: Flutter app in `mobile/`, .NET backend in `backend/`.
 - Follow OWASP MASVS for the app and OWASP ASVS for the backend.
 - All network traffic over TLS (HTTPS only, HSTS on the web viewer). Stored data encrypted at rest by the hosting platform. Journey content is not end-to-end encrypted (ADR-0001); never describe it as such.
 - Location, contact and account data are personal data (CONFIDENTIAL) under UK GDPR and India DPDP: minimise, set retention, support access and erasure. No coordinates in logs, analytics or crash reports.
-- Link IDs are random, at least 128 bits, read-only, rate-limited and expire when the journey ends. Treat the link as a bearer secret.
+- Link IDs are random, at least 128 bits, read-only and rate-limited. After the journey ends the link shows only a plain ended page with no location, map or alarm details, until the stored journey data is deleted; a revoked link stops working and shows nothing about the journey (ADR-0001). Treat the link as a bearer secret.
 - Push notifications go only to designated contacts the traveller selected for that journey.
 - Validate provider identity tokens fully (issuer, audience, signature, expiry); link accounts only on a verified email; store passwords only as salted hashes; Google Maps keys are restricted per platform.
 - Auth tokens live in platform secure storage; no secrets in the repo; provider keys via build-time configuration.
