@@ -8,6 +8,7 @@ TravelBuddy is currently a test app for the UK and India. The items below were c
 - **DPIA** for continuous location sharing, and a review of the retention default (24 hours after a journey ends, ADR-0001).
 - **Privacy notice** content: location read about once a minute and faster only near the alert point; nothing read outside an active journey (SOS excepted); Google processes search and map usage; journey content is not end-to-end encrypted; the contact-matching flow.
 - **Processor agreements** with Google, Azure and push providers; third-party contact data (the people a user picks from their contacts).
+- **Erasure and access requests from unregistered users are refused** (product decision, 2026-10-07). A Traveller with no Account has no identifying details in the app, so TravelBuddy cannot match a request to their data, and their Journey data is removed by the retention period after the Journey ends. Confirm with the data-protection owner before production that this satisfies UK GDPR and the India DPDP Act, including whether the retention period and the identifiers the Share link and Backend hold are enough for the answer to stand.
 - **Account deletion** removes all user data, including links to other users' contacts.
 
 ## Platform and vendor
